@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+                table { border: 1px solid black;      }
+                body {background-color: rgb(240, 216, 200);}
+                h1 {font-family: sans-serif}
 
-</body>
+                th {
+                    border: 1px solid #999;
+                    padding: 0.1em 1em;
+                    word-wrap: break-word
+                    width:330px;
+                    font-size: 130%
+                }
+                td {
+                    border: 1px solid #999;
+                    padding: 0.1em 1em;
+                    word-wrap: break-word
+                    width:330px;
+                }
+
+        </style>
+        <title>Ask Mate</title>
+    </head>
+        <body>
+            <h1>Ask Mate - Questions</h1>
+            <!-- <p><a href="/NOWA STRONA"> <input type="button" value="Add new Question"></a></p> -->
+            <table style="width:100%">
+                <!-- HEADERSY DO TABELI -->
+                <th width="10%">{{ headers.0 }}</th> <!-- ID  -->
+                <th width="10%">{{ headers.1 }}</th> <!-- submission_time  -->
+                <th width="10%">{{ headers.2 }}</th> <!-- Views  -->
+                <th width="10%">{{ headers.3 }}</th> <!-- Votes  -->
+                <th width="70%">{{ headers.4 }}</th> <!-- Title  -->
+
+                <!-- #petla wpisujaca wartosci -->
+                {% for row in list_of_dict_on_main %}
+                    <tr>
+                        {% for key, value in row.items() %}
+                            <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+
+            </table>
+        </body>
 </html>

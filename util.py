@@ -1,4 +1,5 @@
 import base64
+import persistence
 
 
 def string_to_base64(s):
@@ -7,3 +8,11 @@ def string_to_base64(s):
 
 def base64_to_string(b):
     return base64.b64decode(b).decode('utf-8')
+
+
+def get_headers_on_main_site(a):
+    headers = persistence.import_headers("sample_data/question.csv")
+    new_dic__ist = []
+    for row in a:
+        new_dic__ist.append(dict((key, value) for key, value in row.items() if key in headers[:5]))
+    return new_dic__ist
