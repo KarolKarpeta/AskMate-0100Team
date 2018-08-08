@@ -1,11 +1,8 @@
 from datetime import datetime
 import base64
 import persistence
-<<<<<<< HEAD
 import uuid
-=======
 import time
->>>>>>> d0bd6dc1b1deac478003c26c6b8aad415e8e3b22
 
 
 def string_to_base64(s):
@@ -23,12 +20,10 @@ def get_headers_on_main_site(a):
         new_dic__ist.append(dict((key, value) for key, value in row.items() if key in headers[:5]))
     return new_dic__ist
 
-<<<<<<< HEAD
-
 def generate_id():
     id = uuid.uuid4()
     return id
-=======
+    
 def generate_time_in_UNIX():
     my_list=[]
     today = datetime.now().strftime("%Y-%m-%d %H:%M")
@@ -42,4 +37,20 @@ def convert_unix_to_time_str(unix):
 
     return norm_time
 
->>>>>>> d0bd6dc1b1deac478003c26c6b8aad415e8e3b22
+
+def correct_length(text, validator, length):
+    """
+    Checking if text has valid length.
+
+    Args:
+    text(string): String that will be checked for its length
+    validator(string): Operator used to check text vs length(saved in a string)
+    length(integer): Value checked vs length of text
+
+    Returns: 
+    True or False
+    """
+
+    return eval("len(text) {} length".format(validator))
+
+
