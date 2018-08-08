@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+<h1>Welcome to Ask Mate</h1>
+<div class='area'>
+    <p>add {{question_or_answer}}</p>
+    <form action='/new_question' method="POST">
+        <p>Title of question:</p>
+        <textarea minlenght='10' rows='5' cols='122' name="title" placeholder="Title...">
+            {{title}}
+        </textarea>
+        <p>Message:</p>
+        <textarea minlenght='10' rows='10' cols='122' name="message" placeholder="Your question here...">
+            {{message}}
+        </textarea>
+    <div><button type="submit" value="add">Add question</button>
+    </form>
+
+    <form action='/list' method="GET">
+        <button>Back</button>
+    </form>
+    </div>
+</div>
+
+
+</body>
+</html>
+

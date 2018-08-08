@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-import persistence, util
+import persistence, util, logic
 
 
 app = Flask(__name__)
@@ -15,6 +15,21 @@ def get_list():
         print(list_of_dict_on_main)
 
         return render_template("q_list.html", list_of_dict_on_main=list_of_dict_on_main, headers=headers)
+
+
+@app.route('/new_question', methods=['GET', 'POST'])
+def new_question():
+    if request.method == 'GET':
+        return render_template("new_question.html")
+
+    if request.method == 'POST':
+        title = request.form['title']
+        message = request.form['message']
+        logic.append_row_to_csv(title, message)
+        return render_template("new_question.html")
+
+
+
 
 
 if __name__ == '__main__':

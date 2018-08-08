@@ -22,7 +22,8 @@ def import_headers(file_name):
 
 def export_data_to_file(path, data):
     with open(path, 'a') as csv_file:
-        writer = csv.writer(csv_file, delimeter=',')
+        writer = csv.writer(csv_file, delimiter=',')
         # for line in data:
         writer.writerow(data)
+        print("persistence_add_question")
 
