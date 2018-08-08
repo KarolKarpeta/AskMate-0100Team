@@ -5,11 +5,19 @@
         <title>Ask Mate - Add New Question</title> 
     </head>  
         <body>  
-            <h1>Add New Question</h1> 
+            <h1>Add New Question</h1>
+            {% if message %}
+            <h3>{{message}}</h3>
+            {% endif %}
             <form action="/new-question" method="post">
+                {% if form %}
+                <p><label for="title">Title</label></p> <input id='title' name='title' type="text" value='{{form['title']}}'>
+                <p><label for="message">Message</label></p> <textarea id='message' name='message' rows="10" cols="40">{{form['message']}}</textarea>
+                {% else %}
                 <p><label for="title">Title</label></p> <input id='title' name='title' type="text">
                 <p><label for="message">Message</label></p> <textarea id='message' name='message' rows="10" cols="40"></textarea>
-                <p><button type="button">Submit Question</button></p>
+                {% endif %}
+                <p><button type="submit">Submit Question</button></p>
             </form>
         </body>     
 </html>
