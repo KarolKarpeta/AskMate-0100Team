@@ -26,7 +26,8 @@ def new_question():
         title = request.form['title']
         message = request.form['message']
         logic.append_row_to_csv(title, message)
-        return render_template("new_question.html")
+
+        return redirect('/list')
 
 
 
