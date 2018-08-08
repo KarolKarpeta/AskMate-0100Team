@@ -1,5 +1,6 @@
 import csv
 
+q_headers = ["id","submission_time","view_number","vote_number","title","message","image"]
 
 def import_from_file(file_name):
     dictList = []
@@ -26,4 +27,12 @@ def export_data_to_file(path, data):
         # for line in data:
         writer.writerow(data)
         print("persistence_add_question")
+
+
+def write_data_to_file(file_name, fieldnames, data):
+    with open(file_name, 'a') as csv_file:
+        csv_writer = csv.DictWriter(csv_file, fieldnames)
+        csv_writer.writerow(data)
+
+
 

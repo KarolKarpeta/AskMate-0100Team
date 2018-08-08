@@ -17,7 +17,19 @@ def get_list():
         return render_template("q_list.html", list_of_dict_on_main=list_of_dict_on_main, headers=headers)
 
 
-@app.route('/new_question', methods=['GET', 'POST'])
+@app.route('/new-question', methods=['GET','POST'])
+def add_question():
+    if request.method == 'POST':
+        message = logic.check_message_length(request.form)
+        if message == "Correct":
+            return redirect("/list")
+        else:
+            return render_template('ask_question.html', message=message, form=request.form )
+    else:
+        return render_template('ask_question.html')            
+        
+
+@app.route('/new_questions', methods=['GET', 'POST'])
 def new_question():
     if request.method == 'GET':
         return render_template("new_question.html")
