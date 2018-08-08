@@ -20,10 +20,18 @@ def get_headers_on_main_site(a):
         new_dic__ist.append(dict((key, value) for key, value in row.items() if key in headers[:5]))
     return new_dic__ist
 
+<<<<<<< HEAD
 def generate_id():
     id = uuid.uuid4()
     return id
     
+=======
+
+def generate_id():
+    id = uuid.uuid4()
+    return id
+
+>>>>>>> ae46d5d8580699c9ceaf463494cc4f36fa202e87
 def generate_time_in_UNIX():
     my_list=[]
     today = datetime.now().strftime("%Y-%m-%d %H:%M")
@@ -38,6 +46,7 @@ def convert_unix_to_time_str(unix):
     return norm_time
 
 
+<<<<<<< HEAD
 def correct_length(text, validator, length):
     """
     Checking if text has valid length.
@@ -53,4 +62,16 @@ def correct_length(text, validator, length):
 
     return eval("len(text) {} length".format(validator))
 
+=======
+def prepare_list_to_save_to_the_file(title, massage):
+    generate_id()
+    generate_time_in_UNIX()
+    title_b64 = base64.b64encode(title.encode('utf-8'))
+    massage_b64 = base64.b64encode(massage.encode('utf-8'))
+    
+
+
+    to_add=[id, str(unix), "0", "0",title_b64, massage_b64]
+    return to_add
+>>>>>>> ae46d5d8580699c9ceaf463494cc4f36fa202e87
 
