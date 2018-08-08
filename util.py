@@ -1,5 +1,6 @@
 import base64
 import persistence
+import uuid
 
 
 def string_to_base64(s):
@@ -16,3 +17,8 @@ def get_headers_on_main_site(a):
     for row in a:
         new_dic__ist.append(dict((key, value) for key, value in row.items() if key in headers[:5]))
     return new_dic__ist
+
+
+def generate_id():
+    id = uuid.uuid4()
+    return id
