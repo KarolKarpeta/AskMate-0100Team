@@ -40,3 +40,13 @@ def convert_unix_to_time_str(unix):
 
     return norm_time
 
+
+def prepare_list_to_save_to_the_file(title, massage):
+    generate_id()
+    generate_time_in_UNIX()
+    title_b64 = base64.b64encode(title.encode('utf-8'))
+    massage_b64 = base64.b64encode(massage.encode('utf-8'))
+    
+    to_add=[id, str(unix), "0", "0",title_b64, massage_b64,]
+    return to_add
+
