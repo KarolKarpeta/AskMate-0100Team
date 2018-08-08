@@ -16,6 +16,18 @@ def get_list():
 
         return render_template("q_list.html", list_of_dict_on_main=list_of_dict_on_main, headers=headers)
 
+@app.route('/new-question' methods=['GET','POST'])
+def add_question():
+    if methods == ['POST']:
+        #if error message == True:
+            return render_template("ask_question.html" message_error = message_error)
+        else:
+            list_of_dict = persistence.import_from_file("sample_data/question.csv")
+            list_of_dict_on_main = util.get_headers_on_main_site(list_of_dict)
+            headers = persistence.import_headers("sample_data/question.csv")
+            return redirect ("/list")
+
+
 
 if __name__ == '__main__':
     app.run(
