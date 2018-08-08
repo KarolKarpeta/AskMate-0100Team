@@ -32,3 +32,7 @@ def convert_unix_to_time_str(unix):
 
     return norm_time
 
+def prepare_list_to_save_to_the_file(id,unix,massage):
+    to_add=[id, str(unix), "0", "0", massage]
+    return to_add
+
