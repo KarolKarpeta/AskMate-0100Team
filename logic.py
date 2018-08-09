@@ -28,3 +28,12 @@ def check_message_length(inputs):
     else:
         return "Your message is too short. (Must be at least 10 characters long)"
 
+
+def get_answers_by_id(q_id):
+    all_answers = persistence.import_from_file("sample_data/answer.csv")
+    answers_by_id = []
+    for row in all_answers:
+        if row["question_id"] == q_id:
+            answers_by_id.append(row)
+    return answers_by_id
+

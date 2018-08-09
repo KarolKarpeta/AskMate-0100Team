@@ -49,7 +49,9 @@ def new_question():
 def question(q_id):
     list_of_dict = persistence.import_from_file("sample_data/question.csv")
 
-    list_of_answers = persistence.import_from_file("sample_data/answer.csv")
+    answers_by_id = logic.get_answers_by_id(q_id)
+    print(answers_by_id)
+
     a_headers = persistence.import_headers("sample_data/answer.csv")
     print(a_headers)
     del a_headers[0]
@@ -59,7 +61,7 @@ def question(q_id):
     if request.method == 'GET':
         for quest in list_of_dict:
             if quest['id'] == q_id:
-                return render_template("question.html", quest=quest, list_of_answers=list_of_answers, a_headers=a_headers )
+                return render_template("question.html", quest=quest, answers_by_id=answers_by_id, a_headers=a_headers )
 
 
 if __name__ == '__main__':
