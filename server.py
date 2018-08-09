@@ -9,7 +9,9 @@ app = Flask(__name__)
 def get_list():
     if request.method == 'GET':
         list_of_dict = persistence.import_from_file("sample_data/question.csv")
+
         list_of_dict_on_main = util.get_headers_on_main_site(list_of_dict)
+
         headers = persistence.import_headers("sample_data/question.csv")
         print(list_of_dict)
         print(list_of_dict_on_main)
@@ -17,7 +19,7 @@ def get_list():
         return render_template("q_list.html", list_of_dict_on_main=list_of_dict_on_main, headers=headers)
 
 
-@app.route('/new-question', methods=['GET','POST'])
+@app.route('/new-question', methods=['GET', 'POST'])
 def add_question():
     if request.method == 'POST':
         message = logic.check_message_length(request.form)
@@ -27,7 +29,7 @@ def add_question():
             return render_template('ask_question.html', message=message, form=request.form )
     else:
         return render_template('ask_question.html')            
-        
+
 
 @app.route('/new_questions', methods=['GET', 'POST'])
 def new_question():
@@ -42,7 +44,14 @@ def new_question():
         return redirect('/list')
 
 
+@app.route('/question/<q_id>', methods=['GET', 'POST'])
+def question(q_id):
+    list_of_dict = persistence.import_from_file("sample_data/question.csv")
 
+    if request.method == 'GET':
+        for quest in list_of_dict:
+            if quest['id'] == q_id:
+                return render_template("question.html", quest=quest)
 
 
 if __name__ == '__main__':
