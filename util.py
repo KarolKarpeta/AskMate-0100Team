@@ -24,11 +24,6 @@ def get_headers_on_main_site(a):
 def generate_id():
     id = uuid.uuid4()
     return id
-    
-
-def generate_id():
-    id = uuid.uuid4()
-    return id
 
 
 def generate_time_in_UNIX():
@@ -67,7 +62,6 @@ def correct_length(text, validator, length):
 
     return eval("len(text) {} length".format(validator))
 
-
 def prepare_list_to_save_to_the_file(title, massage):
     id_ = generate_id()
     unix = generate_time_in_UNIX()
@@ -76,5 +70,4 @@ def prepare_list_to_save_to_the_file(title, massage):
     
     to_add=[id_, str(unix), "0", "0", title, massage,]
     return to_add
-
 

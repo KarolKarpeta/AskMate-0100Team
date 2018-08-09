@@ -18,3 +18,24 @@ This is the code I'm using to draw the image (that works on web/desktop but not 
 01d92ac9-f410-4edf-91f9-54b2587e8f23,1533800220,0,0,raz raz raz,dwa dnhglkh,
 8ffe79cf-35c6-4218-8581-8dcc746a6004,1533811620,0,0,yyyyyyyyyyyyyy,yyyyyyyyyyyyyyy,
 b2537d53-d681-45ab-9347-5aff7dd4badd,1533825000,0,0,vxvdvdfg,gfdgfsdggf,
+
+id,submission_time,view_number,vote_number,title,message,image
+0,1493368154,29,7,"How to make lists in Python?","I am totally new to this, any hints?",
+1,1493068124,15,9,"Wordpress loading multiple jQuery Versions","I developed a plugin that uses the jquery booklet plugin (http://builtbywill.com/booklet/#/) this plugin binds a function to $ so I cann call $('.myBook').booklet();
+
+I could easy managing the loading order with wp_enqueue_script so first I load jquery then I load booklet so everything is fine.
+
+BUT in my theme i also using jquery via webpack so the loading order is now following:
+
+jquery
+booklet
+app.js (bundled file with webpack, including jquery)","images/image1.png"
+2,1493015432,1364,57,"Drawing canvas with an image picked with Cordova Camera Plugin","I'm getting an image from device and drawing a canvas with filters using Pixi JS. It works all well using computer to get an image. But when I'm on IOS, it throws errors such as cross origin issue, or that I'm trying to use an unknown format.
+
+This is the code I'm using to draw the image (that works on web/desktop but not cordova built ios app)",
+3,1493368154,29,7,testttt,testttt
+3,1493368154,29,7,testttt,testttt"
+82da4fbe-2e72-41e7-9a25-fbd10aedc49f,1533800160,0,0,hjgjhgjhghjg,jhjkhjkhjk,
+01d92ac9-f410-4edf-91f9-54b2587e8f23,1533800220,0,0,raz raz raz,dwa dnhglkh,
+8ffe79cf-35c6-4218-8581-8dcc746a6004,1533811620,0,0,yyyyyyyyyyyyyy,yyyyyyyyyyyyyyy,
+
