@@ -1,5 +1,5 @@
 import csv
-
+import time
 q_headers = ["id","submission_time","view_number","vote_number","title","message","image"]
 
 
@@ -12,8 +12,9 @@ def import_from_file(file_name):
     for lists in dictList:
         for key , value in lists.items():
             if key == 'submission_time':
-                value_normal=time.strftime("%Y-%m-%d %H:%M", time.localtime(int(value)))
-                lists[key]=value_normal
+                if type(value)== str:
+                    value_normal=time.strftime("%Y-%m-%d %H:%M", time.localtime(int(value)))
+                    lists[key]=str(value_normal)
     return dictList
 
 
