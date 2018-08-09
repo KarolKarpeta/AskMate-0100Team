@@ -28,13 +28,13 @@
             <h1>Ask Mate - Questions</h1>
 
             <label for="add"> Click for this button to add question </label> <br>
-            <p><a href="/new_question"> <input type="button" value="Add new Question" name = "add"></a></p>
+            <p><a href="/new-question"> <input type="button" value="Add new Question" name = "add"></a></p>
 
             <p><a href="/new_questions"> <input type="button" value="Add new Question Kamil" name = "add"></a></p>
 
             <table style="width:100%">
                 <!-- HEADERSY DO TABELI -->
-                <th width="10%">{{ headers.0 }}</th> <!-- ID  -->
+                <th width="10%">{{ headers[0] }}</th> <!-- ID  -->
                 <th width="10%">{{ headers.1 }}</th> <!-- submission_time  -->
                 <th width="10%">{{ headers.2 }}</th> <!-- Views  -->
                 <th width="10%">{{ headers.3 }}</th> <!-- Votes  -->
@@ -44,7 +44,11 @@
                 {% for row in list_of_dict_on_main %}
                     <tr>
                         {% for key, value in row.items() %}
-                            <td>{{ value }}</td>
+                            {% if key == "title" %}
+                                <td>   <a href="{{ url_for('question', q_id = row["id"]) }}">{{ value }} </a> </td>
+                            {% else %}
+                                <td>{{ value }}</td>
+                            {% endif %}
                         {% endfor %}
                     </tr>
                 {% endfor %}
