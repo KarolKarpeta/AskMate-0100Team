@@ -13,14 +13,13 @@
                     border: 1px solid #999;
                     padding: 0.1em 1em;
                     word-wrap: break-word;
-                    width:330px;
                     font-size: 130%
                 }
                 td {
                     border: 1px solid #999;
                     padding: 0.1em 1em;
                     word-wrap: break-word;
-                    width:330px;
+
                 }
 
         </style>
@@ -36,18 +35,18 @@
     <table style="width:100%">
                 <!-- HEADERSY DO TABELI id,submission_time,vote_number,question_id,message,image -->
 
-                <th width="10%">{{ a_headers.0 }}</th> <!-- id  -->
-                <th width="10%">{{ a_headers.1 }}</th> <!-- submission_time  -->
-                <th width="10%">{{ a_headers.2 }}</th> <!-- vote_number  -->
-                <th width="10%">{{ a_headers.3 }}</th> <!-- question_id  -->
-                <th width="70%">ANSWERS</th> <!-- message  -->
-                <th width="70%">{{ a_headers.5 }}</th> <!-- image  -->
+                <!-- id  -->
+                <th width="3%">Submission time</th> <!-- submission_time  -->
+                <th width="3%">Vote_number</th> <!-- vote_number  -->
+                 <!-- question_id  -->
+                <th width="94%">ANSWER</th> <!-- message  -->
+                <!-- image  -->
 
                 <!-- #petla wpisujaca wartosci -->
                 {% for row in list_of_answers %}
                     <tr>
                         {% for key, value in row.items() %}
-                            {% if key != "question_id" or key != "image" %}
+                            {% if key in a_headers %}
                                 <td>{{ value }}</td>
                             {% endif %}
                         {% endfor %}

@@ -43,6 +43,7 @@ def new_question():
 
         return redirect('/list')
 
+# id,submission_time,vote_number,question_id,message,image
 
 @app.route('/question/<q_id>', methods=['GET', 'POST'])
 def question(q_id):
@@ -50,6 +51,10 @@ def question(q_id):
 
     list_of_answers = persistence.import_from_file("sample_data/answer.csv")
     a_headers = persistence.import_headers("sample_data/answer.csv")
+    print(a_headers)
+    del a_headers[0]
+    del a_headers[2]
+    del a_headers[3]
 
     if request.method == 'GET':
         for quest in list_of_dict:
