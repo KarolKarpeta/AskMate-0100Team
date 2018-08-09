@@ -23,7 +23,7 @@ def check_message_length(inputs):
             "vote_number" :0,
             "image" : inputs.get("image")
         } 
-        persistence.write_data_to_file("sample_data/question.csv", persistence.q_headers , new_data)
+        persistence.write_data_to_file("sample_data/question.csv", persistence.q_headers, new_data)
         return "Correct"
     else:
         return "Your message is too short. (Must be at least 10 characters long)"
