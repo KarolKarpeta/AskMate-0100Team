@@ -48,10 +48,13 @@ def new_question():
 def question(q_id):
     list_of_dict = persistence.import_from_file("sample_data/question.csv")
 
+    list_of_answers = persistence.import_from_file("sample_data/answer.csv")
+    a_headers = persistence.import_headers("sample_data/answer.csv")
+
     if request.method == 'GET':
         for quest in list_of_dict:
             if quest['id'] == q_id:
-                return render_template("question.html", quest=quest)
+                return render_template("question.html", quest=quest, list_of_answers=list_of_answers, a_headers=a_headers )
 
 
 if __name__ == '__main__':

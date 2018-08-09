@@ -3,6 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <style>
+                table { border: 1px solid black;      }
+                body {background-color: rgb(240, 216, 200);}
+                h1 {font-family: sans-serif}
+
+                th {
+                    border: 1px solid #999;
+                    padding: 0.1em 1em;
+                    word-wrap: break-word;
+                    width:330px;
+                    font-size: 130%
+                }
+                td {
+                    border: 1px solid #999;
+                    padding: 0.1em 1em;
+                    word-wrap: break-word;
+                    width:330px;
+                }
+
+        </style>
 </head>
 <body>
 
@@ -11,6 +32,30 @@
 
         <h3>  {{ quest["title"] }} </h3>
         <p> {{ quest["message"] }} </p>
+
+    <table style="width:100%">
+                <!-- HEADERSY DO TABELI id,submission_time,vote_number,question_id,message,image -->
+
+                <th width="10%">{{ a_headers.0 }}</th> <!-- id  -->
+                <th width="10%">{{ a_headers.1 }}</th> <!-- submission_time  -->
+                <th width="10%">{{ a_headers.2 }}</th> <!-- vote_number  -->
+                <th width="10%">{{ a_headers.3 }}</th> <!-- question_id  -->
+                <th width="70%">ANSWERS</th> <!-- message  -->
+                <th width="70%">{{ a_headers.5 }}</th> <!-- image  -->
+
+                <!-- #petla wpisujaca wartosci -->
+                {% for row in list_of_answers %}
+                    <tr>
+                        {% for key, value in row.items() %}
+                            {% if key != "question_id" or key != "image" %}
+                                <td>{{ value }}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+
+            </table>
 
 </body>
 </html>
