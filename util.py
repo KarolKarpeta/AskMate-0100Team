@@ -41,6 +41,12 @@ def convert_unix_to_time_str(unix):
     return norm_time
 
 
+def prepare_list_to_save_to_the_file(title, massage):
+    id = generate_id()
+    unix = generate_time_in_UNIX()
+    title_b64 = base64.b64encode(title.encode('utf-8'))
+    massage_b64 = base64.b64encode(massage.encode('utf-8'))
+    
 def correct_length(text, validator, length):
     """
     Checking if text has valid length.

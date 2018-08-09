@@ -43,15 +43,25 @@ def new_question():
 
         return redirect('/list')
 
+# id,submission_time,vote_number,question_id,message,image
 
 @app.route('/question/<q_id>', methods=['GET', 'POST'])
 def question(q_id):
     list_of_dict = persistence.import_from_file("sample_data/question.csv")
 
+    answers_by_id = logic.get_answers_by_id(q_id)
+    print(answers_by_id)
+
+    a_headers = persistence.import_headers("sample_data/answer.csv")
+    print(a_headers)
+    del a_headers[0]
+    del a_headers[2]
+    del a_headers[3]
+
     if request.method == 'GET':
         for quest in list_of_dict:
             if quest['id'] == q_id:
-                return render_template("question.html", quest=quest)
+                return render_template("question.html", quest=quest, answers_by_id=answers_by_id, a_headers=a_headers )
 
 
 if __name__ == '__main__':
