@@ -29,6 +29,8 @@
 
 <h1>Display Question</h1>
 
+    <p><a href="/list"> <input type="button" value="BACK" name = "add"></a></p>
+
         <h3>  {{ quest["title"] }} </h3>
         <p> {{ quest["message"] }} </p>
 
@@ -57,6 +59,11 @@
             </table>
 
             <p><label for="message">Post Answer:</label></p>
-                    <textarea id='answer' name='answer' rows="10" cols="40" style = "width : 100%" >write here .....</textarea>
+
+            <form action='{{ url_for('question', q_id = quest["id"]) }}' method="POST">
+                <textarea id='answer' name='answer' rows="5" style = "width : 100%" >write here .....</textarea>
+                <p><button type="submit" name="add_answer" value="add_row">ANSWER</button></p>
+            </form>
+            <h3>{{message}}</h3>
 </body>
 </html>

@@ -46,7 +46,8 @@ def prepare_list_to_save_to_the_file(title, massage):
     unix = generate_time_in_UNIX()
     title_b64 = base64.b64encode(title.encode('utf-8'))
     massage_b64 = base64.b64encode(massage.encode('utf-8'))
-    
+
+
 def correct_length(text, validator, length):
     """
     Checking if text has valid length.
@@ -61,6 +62,7 @@ def correct_length(text, validator, length):
     """
 
     return eval("len(text) {} length".format(validator))
+
 
 def prepare_list_to_save_to_the_file(title, massage):
     id_ = generate_id()

@@ -11,10 +11,9 @@ def get_list():
         list_of_dict = persistence.import_from_file("sample_data/question.csv")
 
         list_of_dict_on_main = util.get_headers_on_main_site(list_of_dict)
+        list_of_dict_on_main.reverse()
 
         headers = persistence.import_headers("sample_data/question.csv")
-        print(list_of_dict)
-        print(list_of_dict_on_main)
 
         return render_template("q_list.html", list_of_dict_on_main=list_of_dict_on_main, headers=headers)
 
@@ -22,7 +21,7 @@ def get_list():
 @app.route('/new-question', methods=['GET', 'POST'])
 def add_question():
     if request.method == 'POST':
-        message = logic.check_message_length(request.form)
+        message = logic.check_question_message_length(request.form)
         if message == "Correct":
             return redirect("/list")
         else:
@@ -45,15 +44,15 @@ def new_question():
 
 # id,submission_time,vote_number,question_id,message,image
 
+
 @app.route('/question/<q_id>', methods=['GET', 'POST'])
 def question(q_id):
+    print("TUTAJ")
     list_of_dict = persistence.import_from_file("sample_data/question.csv")
 
     answers_by_id = logic.get_answers_by_id(q_id)
-    print(answers_by_id)
 
     a_headers = persistence.import_headers("sample_data/answer.csv")
-    print(a_headers)
     del a_headers[0]
     del a_headers[2]
     del a_headers[3]
@@ -61,7 +60,22 @@ def question(q_id):
     if request.method == 'GET':
         for quest in list_of_dict:
             if quest['id'] == q_id:
-                return render_template("question.html", quest=quest, answers_by_id=answers_by_id, a_headers=a_headers )
+                return render_template("question.html", quest=quest, answers_by_id=answers_by_id, a_headers=a_headers, message="")
+
+    elif request.method == 'POST':
+        print("kuku")
+        answer_message = request.form["answer"]
+        print(answer_message)
+
+        message = logic.check_answer_message_length(answer_message, q_id)
+        if str(message) == "Correct":
+            print("correct")
+            return redirect("/question/" + str(q_id))
+        else:
+            for quest in list_of_dict:
+                if quest['id'] == q_id:
+                    print("not correct")
+                    return render_template("question.html", quest=quest, answers_by_id=answers_by_id, a_headers=a_headers, message=message)
 
 
 if __name__ == '__main__':
