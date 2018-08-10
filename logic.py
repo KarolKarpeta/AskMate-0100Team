@@ -10,8 +10,8 @@ def append_row_to_csv(title, message):
     persistence.export_data_to_file("sample_data/question.csv", data)
 
 
-
-def check_message_length(inputs):
+def check_question_message_length(inputs):
+    # chceck if the message length isnt shorter than 10 chars and write data to file
     new_data = {}
     if util.correct_length(inputs['message'], ">=", 10):
         new_data = {
@@ -27,6 +27,33 @@ def check_message_length(inputs):
         return "Correct"
     else:
         return "Your message is too short. (Must be at least 10 characters long)"
+
+# id,submission_time,vote_number,question_id,message,image
+
+
+def check_answer_message_length(message, q_id):
+    new_data = {}
+    if util.correct_length(message, ">=", 10):
+        new_data = {
+            "id": util.generate_id(),
+            "submission_time": util.generate_time_in_UNIX(),
+            "vote_number": 0,
+
+            "question_id": q_id,
+
+            "message": message,
+            "image": "blank",
+            }
+        persistence.write_data_to_file("sample_data/answer.csv", persistence.a_headers, new_data)
+        return "Correct"
+    else:
+        return "Your message is too short. (Must be at least 10 characters long)"
+
+
+
+
+
+
 
 
 def get_answers_by_id(q_id):
