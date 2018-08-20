@@ -1,5 +1,28 @@
 import database_common
-import ui_c
+
+
+@database_common.connection_handler # to jest POPRAWNE ZAPYTANIE DO BAZY ASKMATE
+def get_all_questions(cursor):
+
+    cursor.execute("""SELECT * FROM question; """)  # get question data
+    all_questions = cursor.fetchall()
+
+    columns = [column[0] for column in cursor.description] # get headers
+
+    result = {}
+    result['all_questions'] = all_questions
+    result['columns'] = columns
+
+    return result  # return questions with headers
+
+
+
+
+
+
+
+
+# old functions down
 
 
 @database_common.connection_handler
@@ -8,11 +31,6 @@ def get_mentor_names_by_first_name(cursor, first_name):
     names = cursor.fetchall()
     return names
 
-@database_common.connection_handler # to jest POPRAWNE ZAPYTANIE DO BAZY ASKMATE
-def get_all_questions(cursor):
-    cursor.execute("""SELECT * FROM question; """)
-    names = cursor.fetchall()
-    return names
 
 @database_common.connection_handler
 def get_mentor_first_name_lastname(cursor):

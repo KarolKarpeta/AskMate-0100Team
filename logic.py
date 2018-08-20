@@ -1,5 +1,22 @@
 import persistence, util
+import data_manager
 
+def get_all_questions():
+    try:
+        return data_manager.get_all_questions()
+    except FileNotFoundError as e:
+        # logging.debug(e)
+        return []
+
+
+
+
+
+
+
+
+
+# old functions down
 
 def append_row_to_csv(title, message):
     data = util.prepare_list_to_save_to_the_file(title, message)
