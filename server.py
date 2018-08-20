@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import persistence, util, logic
 
-
 app = Flask(__name__)
 
 
@@ -20,14 +19,15 @@ def get_list():
 
 @app.route('/new-question', methods=['GET', 'POST'])
 def add_question():
+    msg = ""
+    form_values = {}
+
     if request.method == 'POST':
-        message = logic.check_question_message_length(request.form)
-        if message == "Correct":
+        msg = logic.check_question_message_length(request.form)
+        form_values = request.form
+        if msg == "Correct":
             return redirect("/list")
-        else:
-            return render_template('ask_question.html', message=message, form=request.form )
-    else:
-        return render_template('ask_question.html')            
+    return render_template('ask_question.html', message=msg, form=form_values)
 
 
 @app.route('/new_questions', methods=['GET', 'POST'])
@@ -41,8 +41,6 @@ def new_question():
         logic.append_row_to_csv(title, message)
 
         return redirect('/list')
-
-# id,submission_time,vote_number,question_id,message,image
 
 
 @app.route('/question/<q_id>', methods=['GET', 'POST'])
@@ -60,7 +58,8 @@ def question(q_id):
     if request.method == 'GET':
         for quest in list_of_dict:
             if quest['id'] == q_id:
-                return render_template("question.html", quest=quest, answers_by_id=answers_by_id, a_headers=a_headers, message="")
+                return render_template("question.html", quest=quest, answers_by_id=answers_by_id, a_headers=a_headers,
+                                       message="")
 
     elif request.method == 'POST':
         print("kuku")
@@ -75,7 +74,8 @@ def question(q_id):
             for quest in list_of_dict:
                 if quest['id'] == q_id:
                     print("not correct")
-                    return render_template("question.html", quest=quest, answers_by_id=answers_by_id, a_headers=a_headers, message=message)
+                    return render_template("question.html", quest=quest, answers_by_id=answers_by_id,
+                                           a_headers=a_headers, message=message)
 
 
 if __name__ == '__main__':

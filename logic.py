@@ -1,8 +1,5 @@
 import persistence, util
 
-# id,submission_time,view_number,vote_number,title,message,image
-# 0,1493368154,29,7,"How to make lists in Python?","I am totally new to this, any hints?",
-
 
 def append_row_to_csv(title, message):
     data = util.prepare_list_to_save_to_the_file(title, message)
@@ -28,7 +25,6 @@ def check_question_message_length(inputs):
     else:
         return "Your message is too short. (Must be at least 10 characters long)"
 
-# id,submission_time,vote_number,question_id,message,image
 
 
 def check_answer_message_length(message, q_id):
