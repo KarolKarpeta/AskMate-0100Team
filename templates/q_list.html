@@ -33,10 +33,10 @@
             <table style="width:100%">
                 <!-- HEADERSY DO TABELI -->
                  <!-- ID  -->
-                <th width="5">{{ headers.1 }}</th> <!-- submission_time  -->
-                <th width="60%">{{ headers.2 }}</th> <!-- Title  -->
-                <th width="4%">{{ headers.5 }}</th> <!-- Views  -->
-                <th width="4%">{{ headers.6}}</th> <!-- Votes  -->
+                <th width="5">{{ headers.0 }}</th> <!-- submission_time  -->
+                <th width="5%">{{ headers.1 }}</th> <!-- Title  -->
+                <th width="60%">{{ headers.4 }}</th> <!-- Views  -->
+
 
 
                 <!-- #petla wpisujaca wartosci -->
@@ -46,7 +46,7 @@
                         <td style="text-align : center">{{row['id']}}</td>
                         <td> <a href="{{ url_for('question', q_id = row["id"]) }}">{{ row['submission_time'] }} </a> </td>
                         <td style="text-align : center">{{row['title']}}</td>
-                        <td style="text-align : center">{{row['message']}}</td>
+
 
 
 
