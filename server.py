@@ -7,14 +7,17 @@ app = Flask(__name__)
 @app.route('/list', methods=['GET', 'POST'])
 def get_list():
     if request.method == 'GET':
-        list_of_dict = persistence.import_from_file("sample_data/question.csv")
+        # list_of_dict = persistence.import_from_file("sample_data/question.csv")
+        # list_of_dict_on_main = util.get_headers_on_main_site(list_of_dict)
+        # list_of_dict_on_main.reverse()
+        # headers = persistence.import_headers("sample_data/question.csv")
 
-        list_of_dict_on_main = util.get_headers_on_main_site(list_of_dict)
-        list_of_dict_on_main.reverse()
+        questions_and_headers = logic.get_all_questions()
+        try:
+            return render_template("q_list.html", list_of_dict_on_main=questions_and_headers['all_questions'], headers=questions_and_headers['columns'])
+        except Exception as e:
+            return render_template("500.html", error=e)
 
-        headers = persistence.import_headers("sample_data/question.csv")
-
-        return render_template("q_list.html", list_of_dict_on_main=list_of_dict_on_main, headers=headers)
 
 
 @app.route('/new-question', methods=['GET', 'POST'])
