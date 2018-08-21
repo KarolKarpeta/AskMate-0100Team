@@ -47,11 +47,9 @@
                 <!-- #petla wpisujaca wartosci -->
                 {% for row in answers_by_id %}
                     <tr>
-                        {% for key, value in row.items() %}
-                            {% if key in a_headers %}
-                                <td>{{ value }}</td>
-                            {% endif %}
-                        {% endfor %}
+                        <td>{{ row['submission_time'] }}</td>
+                        <td>{{ row['vote_number'] }}</td>
+                        <td>{{ row['message'] }}</td>
                     </tr>
                 {% endfor %}
 

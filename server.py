@@ -53,8 +53,7 @@ def question(q_id):
 
     #  = persistence.import_from_file("sample_data/question.csv")
     one_question = logic.get_question_by_id_logic(q_id)
-
-    answers_by_id = logic.get_answers_by_id(q_id)
+    answers_by_question_id = logic.get_answers_by_id_logic(q_id)
 
     #a_headers = persistence.import_headers("sample_data/answer.csv")
     #del a_headers[0]
@@ -64,23 +63,26 @@ def question(q_id):
     if request.method == 'GET':
         # for quest in list_of_dict:
         # if quest['id'] == q_id:
-        return render_template("question.html", quest=one_question['question_by_id'], answers_by_id=answers_by_id, a_headers=one_question['columns'],  message="")
+        return render_template("question.html", quest=one_question['question_by_id'], answers_by_id=answers_by_question_id['answers_by_question_id'], a_headers=answers_by_question_id['columns'],  message="")
 
     elif request.method == 'POST':
         print("kuku")
         answer_message = request.form["answer"]
         print(answer_message)
 
-        message = logic.check_answer_message_length(answer_message, q_id)
-        if str(message) == "Correct":
+        #comunicat = logic.check_answer_message_length(answer_message, q_id)
+
+        communicat = logic.check_answer_length_logic(answer_message) # check_answer_message_length(answer_message, q_id)
+
+        if str(communicat) == "Correct":
             print("correct")
+            logic.add_new_answer_logic(q_id, answer_message) # insert 
             return redirect("/question/" + str(q_id))
         else:
             for quest in list_of_dict:
                 if quest['id'] == q_id:
                     print("not correct")
-                    return render_template("question.html", quest=quest, answers_by_id=answers_by_id,
-                                           a_headers=a_headers, message=message)
+                    return render_template("question.html", quest=quest, answers_by_id=answers_by_id, a_headers=a_headers, message=message)
 
 
 '''
@@ -118,6 +120,14 @@ def question(q_id):
                     print("not correct")
                     return render_template("question.html", quest=quest, answers_by_id=answers_by_id,
                                            a_headers=a_headers, message=message)
+                                           
+                                           
+                                           
+                        {% for key, value in row.items() %} from question.html TO DELETE !!!!!!!!!!!
+                            {% if key in a_headers %}
+                                <td>{{ value }}</td>
+                            {% endif %}
+                        {% endfor %}
 '''
 
 if __name__ == '__main__':

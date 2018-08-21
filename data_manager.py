@@ -32,10 +32,10 @@ def get_questions_by_id_dbm(cursor, q_id):
 
 
 @database_common.connection_handler # get all answers connected to questions by ID
-def get_answers_by_id_dbm(cursor, q_id):
+def get_answers_by_question_id_dbm(cursor, q_id):
 
-    cursor.execute("""SELECT * FROM question where id = {}; """.format(q_id))  # get answers data
-    answers_by_question_id = cursor.fetchone()
+    cursor.execute("""SELECT * FROM answer where question_id = {}; """.format(q_id))  # get answers data
+    answers_by_question_id = cursor.fetchall()
 
     columns = [column[0] for column in cursor.description] # get headers
 
@@ -58,6 +58,17 @@ def add_new_question(cursor, title, message):
                     (submission_time,view_number,vote_number,title,message)
                     VALUES('{}',0, 0, '{}', '{}');
                     """.format(submission_time,title,message))
+    return cursor.rowcount
+
+
+@database_common.connection_handler # add new answer and question ID
+def add_new_answer_db(cursor, q_id, message):
+    time = util.generate_time_in_UNIX()
+    submission_time = util.convert_unix_to_time_str(time)
+    cursor.execute ("""
+                    INSERT INTO answer
+                    (submission_time, vote_number, question_id, message)
+                    VALUES('{}',0, {}, '{}');""".format(submission_time, q_id, message))
     return cursor.rowcount
 
 
