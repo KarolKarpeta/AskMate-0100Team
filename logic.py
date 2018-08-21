@@ -1,8 +1,22 @@
 import persistence, util
+import data_manager
 
-# id,submission_time,view_number,vote_number,title,message,image
-# 0,1493368154,29,7,"How to make lists in Python?","I am totally new to this, any hints?",
+def get_all_questions():
+    try:
+        return data_manager.get_all_questions()
+    except FileNotFoundError as e:
+        # logging.debug(e)
+        return []
 
+
+
+
+
+
+
+
+
+# old functions down
 
 def append_row_to_csv(title, message):
     data = util.prepare_list_to_save_to_the_file(title, message)
@@ -28,7 +42,10 @@ def check_question_message_length(inputs):
     else:
         return "Your message is too short. (Must be at least 10 characters long)"
 
+<<<<<<< HEAD
 # id,submission_time,vote_number,question_id,message,image
+=======
+>>>>>>> 16604077d2d62b74f2cd95ff892e150cbcc9ee7d
 
 
 def check_answer_message_length(message, q_id):

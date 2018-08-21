@@ -1,33 +1,38 @@
 from flask import Flask, render_template, request, redirect, url_for
 import persistence, util, logic
 
-
 app = Flask(__name__)
 
 
 @app.route('/list', methods=['GET', 'POST'])
 def get_list():
     if request.method == 'GET':
-        list_of_dict = persistence.import_from_file("sample_data/question.csv")
+        # list_of_dict = persistence.import_from_file("sample_data/question.csv")
+        # list_of_dict_on_main = util.get_headers_on_main_site(list_of_dict)
+        # list_of_dict_on_main.reverse()
+        # headers = persistence.import_headers("sample_data/question.csv")
 
-        list_of_dict_on_main = util.get_headers_on_main_site(list_of_dict)
-        list_of_dict_on_main.reverse()
+        questions_and_headers = logic.get_all_questions()
+        try:
+            return render_template("q_list.html", list_of_dict_on_main=questions_and_headers['all_questions'], headers=questions_and_headers['columns'])
+        except Exception as e:
+            return render_template("500.html", error=e)
 
-        headers = persistence.import_headers("sample_data/question.csv")
-
-        return render_template("q_list.html", list_of_dict_on_main=list_of_dict_on_main, headers=headers)
 
 
 @app.route('/new-question', methods=['GET', 'POST'])
 def add_question():
+    msg = ""
+    form_values = {}
+
     if request.method == 'POST':
         message = logic.check_question_message_length(request.form)
         if message == "Correct":
+            msg = logic.check_question_message_length(request.form)
+        form_values = request.form
+        if msg == "Correct":
             return redirect("/list")
-        else:
-            return render_template('ask_question.html', message=message, form=request.form )
-    else:
-        return render_template('ask_question.html')            
+    return render_template('ask_question.html', message=msg, form=form_values)
 
 
 @app.route('/new_questions', methods=['GET', 'POST'])
@@ -75,7 +80,8 @@ def question(q_id):
             for quest in list_of_dict:
                 if quest['id'] == q_id:
                     print("not correct")
-                    return render_template("question.html", quest=quest, answers_by_id=answers_by_id, a_headers=a_headers, message=message)
+                    return render_template("question.html", quest=quest, answers_by_id=answers_by_id,
+                                           a_headers=a_headers, message=message)
 
 
 if __name__ == '__main__':
