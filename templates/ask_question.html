@@ -4,7 +4,9 @@
         <meta charset="utf-8">  
         <title>Ask Mate - Add New Question</title> 
     </head>  
-        <body>  
+        <body>
+        <p><a href="/list"> <input type="button" value="BACK" name = "add"></a></p>
+
             <h1>Add New Question</h1>
             {% if message %}
             <h3>{{message}}</h3>
@@ -12,12 +14,14 @@
             <form action="/new-question" method="post">
                 {% if form %}
                 <p><label for="title">Title</label></p> <input id='title' name='title' type="text" value='{{form['title']}}'>
-                <p><label for="message">Message</label></p> <textarea id='message' name='message' rows="10" cols="40">{{form['message']}}</textarea>
+                <p><label for="message">Message</label></p>
+                    <textarea id='message' name='message' rows="10" cols="40">{{form['message']}}</textarea>
                 {% else %}
                 <p><label for="title">Title</label></p> <input id='title' name='title' type="text">
-                <p><label for="message">Message</label></p> <textarea id='message' name='message' rows="10" cols="40"></textarea>
+                <p><label for="message">Message</label></p>
+                    <textarea id='message' name='message' rows="10" cols="40"></textarea>
                 {% endif %}
-                <p><button type="submit">Submit Question</button></p>
+                <p><button type="submit">ADD QUESTION</button></p>
             </form>
         </body>     
 </html>
