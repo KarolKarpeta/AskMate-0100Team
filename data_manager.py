@@ -33,7 +33,7 @@ def get_questions_by_id_dbm(cursor, q_id):
 
 @database_common.connection_handler # get all answers connected to questions by ID
 def get_answers_by_question_id_dbm(cursor, q_id):
-
+    print("hej", q_id)
     cursor.execute("""SELECT * FROM answer where question_id = {}; """.format(q_id))  # get answers data
     answers_by_question_id = cursor.fetchall()
 

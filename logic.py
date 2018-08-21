@@ -37,8 +37,8 @@ def get_answers_by_id_logic(id): # get list of dictionaries, all answers by q_id
 
 
 # ------------------- iNSERT ANSWER -------------------------------------
-def check_answer_length_logic(inputs):
-    if util.correct_length(inputs['message'], ">=", 10):
+def check_answer_length_logic(message):
+    if util.correct_length(message, ">=", 10):
         # data_manager.add_new_question(inputs['title'],inputs['message'])
         return "Correct"
     else:
@@ -47,7 +47,7 @@ def check_answer_length_logic(inputs):
 
 def add_new_answer_logic(q_id, message): # insert new answer with exact question _id
     try:
-        return data_manager.get_answers_by_question_id_dbm(q_id, message)
+        return data_manager.add_new_answer_db(q_id, message)   #get_answers_by_question_id_dbm(q_id, message)
     except FileNotFoundError as e:
         # logging.debug(e)
         return []

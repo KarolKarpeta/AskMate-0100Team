@@ -72,17 +72,19 @@ def question(q_id):
 
         #comunicat = logic.check_answer_message_length(answer_message, q_id)
 
-        communicat = logic.check_answer_length_logic(answer_message) # check_answer_message_length(answer_message, q_id)
+        communicate =  logic.check_answer_length_logic(answer_message) # check_answer_message_length(answer_message, q_id)
 
-        if str(communicat) == "Correct":
+        if str(communicate) == "Correct":
             print("correct")
-            logic.add_new_answer_logic(q_id, answer_message) # insert 
+            logic.add_new_answer_logic(q_id, answer_message) # insert
             return redirect("/question/" + str(q_id))
         else:
-            for quest in list_of_dict:
-                if quest['id'] == q_id:
-                    print("not correct")
-                    return render_template("question.html", quest=quest, answers_by_id=answers_by_id, a_headers=a_headers, message=message)
+            #for quest in list_of_dict:
+            #    if quest['id'] == q_id:
+            #       print("not correct")
+            return render_template("question.html", quest=one_question['question_by_id'],
+                                           answers_by_id=answers_by_question_id['answers_by_question_id'],
+                                           a_headers=answers_by_question_id['columns'], message=communicate)
 
 
 '''
