@@ -5,8 +5,8 @@ BUT in my theme i also using jquery via webpack so the loading order is now foll
 2,1493015432,1364,57,"Drawing canvas with an image picked with Cordova Camera Plugin","I'm getting an image from device and drawing a canvas with filters using Pixi JS. It works all well using computer to get an image. But when I'm on IOS, it throws errors such as cross origin issue, or that I'm trying to use an unknown format. This is the code I'm using to draw the image (that works on web/desktop but not cordova built ios app)",
 3,1493368154,29,7,testttt,testttt,
 3,1493368154,29,7,testttt,testttt,
-82da4fbe-2e72-41e7-9a25-fbd10aedc49f,1533800160,0,0,hjgjhgjhghjg,jhjkhjkhjk,
-01d92ac9-f410-4edf-91f9-54b2587e8f23,1533800220,0,0,raz raz raz,dwa dnhglkh,
+4,1533800160,0,0,hjgjhgjhghjg,jhjkhjkhjk,
+5,1533800220,0,0,raz raz raz,dwa dnhglkh,
 8ffe79cf-35c6-4218-8581-8dcc746a6004,1533811620,0,0,yyyyyyyyyyyyyy,yyyyyyyyyyyyyyy,
 b2537d53-d681-45ab-9347-5aff7dd4badd,1533825000,0,0,vxvdvdfg,gfdgfsdggf,
 bb98b351-ff19-4105-8249-8215c604b56a,1533844800,0,0,Jak zrobić omlet,"Hej, nie wiem jak zrobić omlet.

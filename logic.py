@@ -1,12 +1,27 @@
 import persistence, util
 import data_manager
 
-def get_all_questions():
+def get_all_questions(): # get list of dictionaries, list of all questions
     try:
         return data_manager.get_all_questions()
     except FileNotFoundError as e:
         # logging.debug(e)
         return []
+
+
+
+def get_question_by_id_logic(id): # get list of dictionaries, exacly 1 dictionary, 1 questions
+    try:
+        return data_manager.get_questions_by_id_dbm(id)
+    except FileNotFoundError as e:
+        # logging.debug(e)
+        return []
+
+
+
+
+
+
 
 def check_question_message_length(inputs):
     # chceck if the message length isnt shorter than 10 chars and write data to file

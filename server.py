@@ -32,6 +32,7 @@ def add_question():
     return render_template('ask_question.html', message=msg, form=form_values)
 
 
+''' USUNĄĆ STARĄ POWTARZAJĄCA FUNKCJĘ
 @app.route('/new_questions', methods=['GET', 'POST'])
 def new_question():
     if request.method == 'GET':
@@ -43,11 +44,50 @@ def new_question():
         logic.append_row_to_csv(title, message)
 
         return redirect('/list')
+'''
 
 
+@app.route('/question/<int:q_id>', methods=['GET', 'POST'])
+def question(q_id):
+    print("TUTAJ")
+
+    #  = persistence.import_from_file("sample_data/question.csv")
+    one_question = logic.get_question_by_id_logic(q_id)
+
+    answers_by_id = logic.get_answers_by_id(q_id)
+
+    #a_headers = persistence.import_headers("sample_data/answer.csv")
+    #del a_headers[0]
+    #del a_headers[2]
+    #del a_headers[3]
+
+    if request.method == 'GET':
+        # for quest in list_of_dict:
+        # if quest['id'] == q_id:
+        return render_template("question.html", quest=one_question['question_by_id'], answers_by_id=answers_by_id, a_headers=one_question['columns'],  message="")
+
+    elif request.method == 'POST':
+        print("kuku")
+        answer_message = request.form["answer"]
+        print(answer_message)
+
+        message = logic.check_answer_message_length(answer_message, q_id)
+        if str(message) == "Correct":
+            print("correct")
+            return redirect("/question/" + str(q_id))
+        else:
+            for quest in list_of_dict:
+                if quest['id'] == q_id:
+                    print("not correct")
+                    return render_template("question.html", quest=quest, answers_by_id=answers_by_id,
+                                           a_headers=a_headers, message=message)
+
+
+'''
 @app.route('/question/<q_id>', methods=['GET', 'POST'])
 def question(q_id):
     print("TUTAJ")
+    
     list_of_dict = persistence.import_from_file("sample_data/question.csv")
 
     answers_by_id = logic.get_answers_by_id(q_id)
@@ -78,10 +118,10 @@ def question(q_id):
                     print("not correct")
                     return render_template("question.html", quest=quest, answers_by_id=answers_by_id,
                                            a_headers=a_headers, message=message)
-
+'''
 
 if __name__ == '__main__':
     app.run(
         port=5000,
-        debug=True,
+        # debug=True,
     )

@@ -1,7 +1,7 @@
 import database_common
 import util
 
-@database_common.connection_handler # to jest POPRAWNE ZAPYTANIE DO BAZY ASKMATE
+@database_common.connection_handler # Get all questions from database
 def get_all_questions(cursor):
 
     cursor.execute("""SELECT * FROM question; """)  # get question data
@@ -14,6 +14,40 @@ def get_all_questions(cursor):
     result['columns'] = columns
 
     return result  # return questions with headers
+
+
+@database_common.connection_handler # get one questions by ID
+def get_questions_by_id_dbm(cursor, q_id):
+
+    cursor.execute("""SELECT * FROM question where id = {}; """.format(q_id))  # get question data
+    question_by_id = cursor.fetchone()
+
+    columns = [column[0] for column in cursor.description] # get headers
+
+    result = {}
+    result['question_by_id'] = question_by_id
+    result['columns'] = columns
+
+    return result  # return questions with headers
+
+
+@database_common.connection_handler # get all answers connected to questions by ID
+def get_answers_by_id_dbm(cursor, q_id):
+
+    cursor.execute("""SELECT * FROM question where id = {}; """.format(q_id))  # get answers data
+    answers_by_question_id = cursor.fetchone()
+
+    columns = [column[0] for column in cursor.description] # get headers
+
+    result = {}
+    result['answers_by_question_id'] = answers_by_question_id
+    result['columns'] = columns
+
+    return result  # return questions with headers
+
+
+
+
 
 @database_common.connection_handler # moja probna funkcja
 def add_new_question(cursor, title, message):
@@ -30,7 +64,7 @@ def add_new_question(cursor, title, message):
 
 
 # old functions down
-
+'''
 
 @database_common.connection_handler
 def get_mentor_names_by_first_name(cursor, first_name):
@@ -73,3 +107,4 @@ def insert_student_Markus_Schaffarzyk(cursor):
     # result['columns'] = columns
 
     return cursor.rowcount
+'''
