@@ -7,12 +7,9 @@ app = Flask(__name__)
 @app.route('/list', methods=['GET', 'POST'])
 def get_list():
     if request.method == 'GET':
-        # list_of_dict = persistence.import_from_file("sample_data/question.csv")
-        # list_of_dict_on_main = util.get_headers_on_main_site(list_of_dict)
-        # list_of_dict_on_main.reverse()
-        # headers = persistence.import_headers("sample_data/question.csv")
 
         questions_and_headers = logic.get_all_questions()
+
         try:
             return render_template("q_list.html", list_of_dict_on_main=questions_and_headers['all_questions'], headers=questions_and_headers['columns'])
         except Exception as e:
@@ -32,56 +29,24 @@ def add_question():
     return render_template('ask_question.html', message=msg, form=form_values)
 
 
-''' USUNĄĆ STARĄ POWTARZAJĄCA FUNKCJĘ
-@app.route('/new_questions', methods=['GET', 'POST'])
-def new_question():
-    if request.method == 'GET':
-        return render_template("new_question.html")
-
-    if request.method == 'POST':
-        title = request.form['title']
-        message = request.form['message']
-        logic.append_row_to_csv(title, message)
-
-        return redirect('/list')
-'''
-
 
 @app.route('/question/<int:q_id>', methods=['GET', 'POST'])
 def question(q_id):
-    print("TUTAJ")
 
-    #  = persistence.import_from_file("sample_data/question.csv")
     one_question = logic.get_question_by_id_logic(q_id)
     answers_by_question_id = logic.get_answers_by_id_logic(q_id)
 
-    #a_headers = persistence.import_headers("sample_data/answer.csv")
-    #del a_headers[0]
-    #del a_headers[2]
-    #del a_headers[3]
-
     if request.method == 'GET':
-        # for quest in list_of_dict:
-        # if quest['id'] == q_id:
         return render_template("question.html", quest=one_question['question_by_id'], answers_by_id=answers_by_question_id['answers_by_question_id'], a_headers=answers_by_question_id['columns'],  message="")
 
     elif request.method == 'POST':
-        print("kuku")
         answer_message = request.form["answer"]
-        print(answer_message)
-
-        #comunicat = logic.check_answer_message_length(answer_message, q_id)
-
         communicate =  logic.check_answer_length_logic(answer_message) # check_answer_message_length(answer_message, q_id)
 
         if str(communicate) == "Correct":
-            print("correct")
             logic.add_new_answer_logic(q_id, answer_message) # insert
             return redirect("/question/" + str(q_id))
         else:
-            #for quest in list_of_dict:
-            #    if quest['id'] == q_id:
-            #       print("not correct")
             return render_template("question.html", quest=one_question['question_by_id'],
                                            answers_by_id=answers_by_question_id['answers_by_question_id'],
                                            a_headers=answers_by_question_id['columns'], message=communicate)
