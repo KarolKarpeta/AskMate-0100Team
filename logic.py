@@ -8,22 +8,6 @@ def get_all_questions():
         # logging.debug(e)
         return []
 
-
-
-
-
-
-
-
-
-# old functions down
-
-def append_row_to_csv(title, message):
-    data = util.prepare_list_to_save_to_the_file(title, message)
-    print("logic_add_question")
-    persistence.export_data_to_file("sample_data/question.csv", data)
-
-
 def check_question_message_length(inputs):
     # chceck if the message length isnt shorter than 10 chars and write data to file
     new_data = {}
@@ -41,6 +25,27 @@ def check_question_message_length(inputs):
         return "Correct"
     else:
         return "Your message is too short. (Must be at least 10 characters long)"
+
+def check_length_message_question_db(inputs):
+    if util.correct_length(inputs['message'], ">=", 10):
+        data_manager.add_new_question(inputs['title'],inputs['message'])
+        return "Correct"
+    else:
+        return "Your message is too short. (Must be at least 10 characters long)"
+
+
+
+
+
+# old functions down
+
+def append_row_to_csv(title, message):
+    data = util.prepare_list_to_save_to_the_file(title, message)
+    print("logic_add_question")
+    persistence.export_data_to_file("sample_data/question.csv", data)
+
+
+
 
 
 

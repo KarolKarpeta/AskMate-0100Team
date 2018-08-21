@@ -1,5 +1,5 @@
 import database_common
-
+import util
 
 @database_common.connection_handler # to jest POPRAWNE ZAPYTANIE DO BAZY ASKMATE
 def get_all_questions(cursor):
@@ -15,9 +15,16 @@ def get_all_questions(cursor):
 
     return result  # return questions with headers
 
-
-
-
+@database_common.connection_handler # moja probna funkcja
+def add_new_question(cursor, title, message):
+    time = util.generate_time_in_UNIX()
+    submission_time = util.convert_unix_to_time_str(time)
+    cursor.execute ("""
+                    INSERT INTO question
+                    (submission_time,view_number,vote_number,title,message)
+                    VALUES('{}',0, 0, '{}', '{}');
+                    """.format(submission_time,title,message))
+    return cursor.rowcount
 
 
 

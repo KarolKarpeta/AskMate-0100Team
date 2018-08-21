@@ -24,9 +24,8 @@ def get_list():
 def add_question():
     msg = ""
     form_values = {}
-
     if request.method == 'POST':
-        msg = logic.check_question_message_length(request.form)
+        msg = logic.check_length_message_question_db(request.form)
         form_values = request.form
         if msg == "Correct":
             return redirect("/list")

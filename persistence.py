@@ -23,7 +23,7 @@ def import_from_file(file_name):
     return dictList
 
 
-print(import_from_file('sample_data/question.csv'))
+# print(import_from_file('sample_data/question.csv')) muli mi kompa!
 
 
 def import_headers(file_name):
