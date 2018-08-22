@@ -69,6 +69,18 @@ def search_question():
     except Exception as e:
         return render_template("500.html", error=e)
 
+@app.route('/question/<int:a_id>/delete', methods=['GET', 'POST'])
+def delete_question(q_id):
+    if request.method == 'POST':
+        question = logic.get_all_answers()
+        for dic in question:
+            if dic['id'] == a_id:
+                q_id = dic['question_id']
+        logic.delete_answer_logic(a_id)
+    try:
+        return redirect("/question/" + str(q_id))
+    except Exception as e:
+        return render_template("500.html", error=e)
 
 @app.route('/answer/<int:a_id>/delete', methods=['GET', 'POST'])
 def delete_answer(a_id):

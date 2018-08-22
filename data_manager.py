@@ -100,7 +100,9 @@ def search_question_db(cursor, message):
 def delete_answer_db(cursor, a_id):
     cursor.execute("""DELETE FROM answer WHERE id = {};""".format(a_id))
 
-
+@database_common.connection_handler 
+def delete_question_db(cursor, q_id):
+    cursor.execute("""DELETE FROM question WHERE id = {};""".format(a_id))
 
 
 # -------------------------- QUESTION VIEWS --------------------
