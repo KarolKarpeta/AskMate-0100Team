@@ -71,8 +71,7 @@ def search_question():
 
 @app.route('/question/<int:q_id>/delete', methods=['GET', 'POST'])
 def delete_question(q_id):
-    if request.method == 'POST':
-        question = logic.get_all_questions()
+    if request.method == 'POST': # TUTAJ USUNELAM QUESTION BO NIE POT
         answer = logic.get_all_answers()
         for dic in answer:
             if dic['question_id'] == q_id:
@@ -86,8 +85,8 @@ def delete_question(q_id):
 @app.route('/answer/<int:a_id>/delete', methods=['GET', 'POST'])
 def delete_answer(a_id):
     if request.method == 'POST':
-        question = logic.get_all_answers() # CO TO JEST BASIU ???????????????????????
-        for dic in question:
+        answers = logic.get_all_answers() # CO TO JEST BASIU ??????????????????????? MOJ PRZYCIEMNIONY UMYSL, JUZ ZMIENILAM
+        for dic in answers:
             if dic['id'] == a_id:
                 q_id = dic['question_id']
 

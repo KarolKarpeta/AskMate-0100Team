@@ -96,13 +96,17 @@ def search_question_db(cursor, message):
 
 
 # -------------------------- DELETE QUESTION --------------------
-@database_common.connection_handler
+@database_common.connection_handler # BARDZO WAZNA FUNKCJA PROSZE NIE RUSZAC
 def delete_answer_db(cursor, a_id):
     cursor.execute("""DELETE FROM answer WHERE id = {};""".format(a_id))
 
-@database_common.connection_handler 
+@database_common.connection_handler # BARDZO WAZNA FUNKCJA PROSZE NIE RUSZAC
 def delete_question_db(cursor, q_id):
     cursor.execute("""DELETE FROM question WHERE id = {};""".format(q_id))
+
+@database_common.connection_handler # BARDZO WAZNA FUNKCJA PROSZE NIE RUSZAC
+def delete_answer_db_by_q_id(cursor, q_id):
+    cursor.execute("""DELETE FROM answer WHERE question_id = {};""".format(q_id))
 
 
 # -------------------------- QUESTION VIEWS --------------------
