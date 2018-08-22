@@ -82,3 +82,11 @@ def search_question_logic(message):
         # logging.debug(e)
         return []
 
+
+# ------------------- QUESTION VIEWS -------------------------------------
+def get_question_view_logic(q_id):
+    try:
+        return data_manager.get_question_views_db(q_id)   #get_answers_by_question_id_dbm(q_id, message)
+    except FileNotFoundError as e:
+        # logging.debug(e)
+        return []
