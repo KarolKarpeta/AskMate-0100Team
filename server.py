@@ -33,10 +33,13 @@ def add_question():
 @app.route('/question/<int:q_id>', methods=['GET', 'POST'])
 def question(q_id):
 
+    q_views = logic.get_question_view_logic(q_id)
+
     one_question = logic.get_question_by_id_logic(q_id)
     answers_by_question_id = logic.get_answers_by_id_logic(q_id)
 
     if request.method == 'GET':
+        print(q_views)
         return render_template("question.html", quest=one_question['question_by_id'], answers_by_id=answers_by_question_id['answers_by_question_id'], a_headers=answers_by_question_id['columns'],  message="")
 
     elif request.method == 'POST':
@@ -83,10 +86,11 @@ def delete_question(q_id):
 @app.route('/answer/<int:a_id>/delete', methods=['GET', 'POST'])
 def delete_answer(a_id):
     if request.method == 'POST':
-        question = logic.get_all_answers()
+        question = logic.get_all_answers() # CO TO JEST BASIU ???????????????????????
         for dic in question:
             if dic['id'] == a_id:
                 q_id = dic['question_id']
+
         logic.delete_answer_logic(a_id)
     try:
         return redirect("/question/" + str(q_id))

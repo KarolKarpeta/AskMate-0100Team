@@ -95,7 +95,8 @@ def search_question_db(cursor, message):
     return result  # return questions with headers
 
 
-@database_common.connection_handler 
+# -------------------------- DELETE QUESTION --------------------
+@database_common.connection_handler
 def delete_answer_db(cursor, a_id):
     cursor.execute("""DELETE FROM answer WHERE id = {};""".format(a_id))
 
@@ -103,6 +104,16 @@ def delete_answer_db(cursor, a_id):
 def delete_question_db(cursor, q_id):
     cursor.execute("""DELETE FROM question WHERE id = {};""".format(q_id))
 
-@database_common.connection_handler 
-def delete_answer_db_by_q_id(cursor, q_id):
-    cursor.execute("""DELETE FROM answer WHERE question_id = {};""".format(q_id))
+
+# -------------------------- QUESTION VIEWS --------------------
+
+@database_common.connection_handler
+def get_question_views_db(cursor, q_id):
+    cursor.execute("""select view_number FROM question WHERE id = {};""".format(q_id))
+    view_number = cursor.fetchone()
+    return view_number
+
+@database_common.connection_handler
+def set_question_views_db(cursor, q_id, views_number):
+    cursor.execute("""UPDATE question SET view_number  = {} WHERE id = {};""".format(views_number, q_id))
+
