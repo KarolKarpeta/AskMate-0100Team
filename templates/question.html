@@ -50,7 +50,7 @@
                         <td>{{ row['submission_time'] }}</td>
                         <td>{{ row['vote_number'] }}</td>
                         <td>{{ row['message'] }}</td>
-                        <td><form action='{{ url_for("delete_answer", a_id = row["id"]) }}' method="POST"><button type="submit" name="delete_answer" value="delete_row">DELETE</button></a></td></form>
+                        <td><form action='{{ url_for("delete_answer", a_id = row["id"]) }}' method="POST"><button type="submit" name="delete_answer" value="delete_row">DELETE</button></form></td>
                     </tr>
                 {% endfor %}
 

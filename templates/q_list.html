@@ -58,6 +58,8 @@
                         <td style="text-align : center">{{row['submission_time']}}</td>
                         <td> <a href="{{ url_for('question', q_id = row["id"] )}}">{{ row['title'] }} </a> </td>
                         <td style="text-align : center">{{row['view_number']}}</td>
+                        <td><form action='{{ url_for("delete_question", q_id = row["id"]) }}' method="POST">
+                            <button type="submit" name="delete_question" value="delete_row">DELETE QUESTION</button></form></td>
                     </tr>
                 {% endfor %}
 

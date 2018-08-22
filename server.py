@@ -119,14 +119,14 @@ def search_question():
 
 @app.route('/question/<int:q_id>/delete', methods=['GET', 'POST'])
 def delete_question(q_id):
-    if request.method == 'POST':
-        question = logic.get_all_answers()
-        for dic in question:
-            if dic['id'] == a_id:
-                q_id = dic['question_id']
-        logic.delete_answer_logic(a_id)
+    if request.method == 'POST': # TUTAJ USUNELAM QUESTION BO NIE POT
+        answer = logic.get_all_answers()
+        for dic in answer:
+            if dic['question_id'] == q_id:
+                logic.delete_answer_logic_by_q_id(q_id)
+        logic.delete_question_logic(q_id)
     try:
-        return redirect("/question/" + str(q_id))
+        return redirect("/list")
     except Exception as e:
         return render_template("500.html", error=e)
 
@@ -134,8 +134,8 @@ def delete_question(q_id):
 @app.route('/answer/<int:a_id>/delete', methods=['GET', 'POST'])
 def delete_answer(a_id):
     if request.method == 'POST':
-        question = logic.get_all_answers() # CO TO JEST BASIU ???????????????????????
-        for dic in question:
+        answers = logic.get_all_answers() # CO TO JEST BASIU ??????????????????????? MOJ PRZYCIEMNIONY UMYSL, JUZ ZMIENILAM
+        for dic in answers:
             if dic['id'] == a_id:
                 q_id = dic['question_id']
 
