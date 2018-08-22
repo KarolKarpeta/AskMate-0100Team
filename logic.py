@@ -42,10 +42,7 @@ def check_question_message_length(inputs):
     else:
         return "Your message is too short. (Must be at least 10 characters long)"
 
-<<<<<<< HEAD
 # id,submission_time,vote_number,question_id,message,image
-=======
->>>>>>> 16604077d2d62b74f2cd95ff892e150cbcc9ee7d
 
 
 def check_answer_message_length(message, q_id):
