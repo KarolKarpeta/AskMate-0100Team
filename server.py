@@ -33,14 +33,17 @@ def add_question():
 @app.route('/question/<int:q_id>', methods=['GET', 'POST'])
 def question(q_id):
 
-    if request.method == 'POST':
-        print("gdzies post z question")
-
     q_views = logic.get_question_view_logic(q_id)
+    print(q_views)
+    new_views = int(q_views['view_number']) + 1
+    print(new_views)
+
+    logic.set_question_view_logic(q_id, new_views)
+
     one_question = logic.get_question_by_id_logic(q_id)
     answers_by_question_id = logic.get_answers_by_id_logic(q_id)
 
-    print(q_views)
+
     return render_template("question.html", quest=one_question['question_by_id'],
                            answers_by_id=answers_by_question_id['answers_by_question_id'],
                            a_headers=answers_by_question_id['columns'],  message="")

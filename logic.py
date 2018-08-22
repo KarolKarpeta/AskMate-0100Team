@@ -103,3 +103,10 @@ def get_question_view_logic(q_id):
     except FileNotFoundError as e:
         # logging.debug(e)
         return []
+
+def set_question_view_logic(q_id, views_number):
+    try:
+        return data_manager.set_question_views_db(q_id, views_number)   #get_answers_by_question_id_dbm(q_id, message)
+    except FileNotFoundError as e:
+        # logging.debug(e)
+        return []

@@ -4,7 +4,7 @@ import util
 @database_common.connection_handler # Get all questions from database
 def get_all_questions(cursor):
 
-    cursor.execute("""SELECT * FROM question; """)  # get question data
+    cursor.execute("""SELECT * FROM question order by submission_time desc ; """)  # get question data
     all_questions = cursor.fetchall()
 
     columns = [column[0] for column in cursor.description] # get headers
