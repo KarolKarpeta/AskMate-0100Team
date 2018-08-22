@@ -6,11 +6,11 @@ import time
 
 
 def string_to_base64(s):
-    return base64.b64encode(s.encode('utf-8'))
+    return base64.b64encode(s.encode('utf-8')).decode('utf-8')
 
 
 def base64_to_string(b):
-    return base64.b64decode(b).decode('utf-8')
+    return base64.b64decode(b.encode('utf-8')).decode('utf-8')
 
 
 def get_headers_on_main_site(a):
@@ -20,11 +20,6 @@ def get_headers_on_main_site(a):
         new_dic__ist.append(dict((key, value) for key, value in row.items() if key in headers[:5]))
     return new_dic__ist
 
-
-def generate_id():
-    id = uuid.uuid4()
-    return id
-    
 
 def generate_id():
     id = uuid.uuid4()
@@ -51,7 +46,8 @@ def prepare_list_to_save_to_the_file(title, massage):
     unix = generate_time_in_UNIX()
     title_b64 = base64.b64encode(title.encode('utf-8'))
     massage_b64 = base64.b64encode(massage.encode('utf-8'))
-    
+
+
 def correct_length(text, validator, length):
     """
     Checking if text has valid length.
@@ -76,5 +72,4 @@ def prepare_list_to_save_to_the_file(title, massage):
     
     to_add=[id_, str(unix), "0", "0", title, massage,]
     return to_add
-
 

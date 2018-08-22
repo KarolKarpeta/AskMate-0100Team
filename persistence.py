@@ -1,24 +1,29 @@
 import csv
 import time
-q_headers = ["id","submission_time","view_number","vote_number","title","message","image"]
+
+
+q_headers = ["id", "submission_time", "view_number", "vote_number", "title", "message", "image"]
+a_headers = ["id", "submission_time", "vote_number", "question_id", "message", "image"]
 
 
 def import_from_file(file_name):
     dictList = []
     with open(file_name, 'r') as csv_file:
-        csv_reader=csv.DictReader(csv_file)
+        csv_reader = csv.DictReader(csv_file)
         for row in csv_reader:
             dictList.append(row)
-    for lists in dictList:
-        for key , value in lists.items():
-            if key == 'submission_time':
-                if type(value)== str:
-                    value_normal=time.strftime("%Y-%m-%d %H:%M", time.localtime(int(value)))
-                    lists[key]=str(value_normal)
+
+        for lists in dictList:
+            for key, value in lists.items():
+                if key == 'submission_time':
+                    if type(value) == str:
+                        value_normal = time.strftime("%Y-%m-%d %H:%M", time.localtime(int(value)))
+                        lists[key] = value_normal
+
     return dictList
 
 
-print(import_from_file('sample_data/question.csv'))
+# print(import_from_file('sample_data/question.csv')) muli mi kompa!
 
 
 def import_headers(file_name):
@@ -28,14 +33,14 @@ def import_headers(file_name):
             return header_line
 
 
-def export_data_to_file(path, data):
+def export_data_to_file(path, data): # Kamil
     with open(path, 'a') as csv_file:
         writer = csv.writer(csv_file, delimiter=',')
         writer.writerow(data)
         print("persistence_add_question")
 
 
-def write_data_to_file(file_name, fieldnames, data):
+def write_data_to_file(file_name, fieldnames, data): # Basia
     with open(file_name, 'a') as csv_file:
         csv_writer = csv.DictWriter(csv_file, fieldnames)
         csv_writer.writerow(data)
