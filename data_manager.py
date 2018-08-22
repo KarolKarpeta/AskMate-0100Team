@@ -72,6 +72,26 @@ def add_new_answer_db(cursor, q_id, message):
     return cursor.rowcount
 
 
+@database_common.connection_handler # add new answer and question ID
+def search_question_db(cursor, message):
+    cursor.execute ("""SELECT DISTINCT(q.id), q.submission_time, q.view_number, q.vote_number, q.title, q.message, q.image 
+                        FROM question as q join answer as a on q.id = a.question_id
+                        WHERE LOWER(q.title) LIKE '%{0}%' 
+                        or LOWER(q.message) like '%{0}%' 
+                        or LOWER(a.message) like '%{0}%'; """.format(message))
+    founded_questions = cursor.fetchall()
+
+    columns = [column[0] for column in cursor.description]  # get headers
+
+    result = {}
+    result['founded_questions'] = founded_questions
+    result['columns'] = columns
+
+    return result  # return questions with headers
+
+
+
+
 
 
 # old functions down

@@ -51,6 +51,21 @@ def question(q_id):
                                            answers_by_id=answers_by_question_id['answers_by_question_id'],
                                            a_headers=answers_by_question_id['columns'], message=communicate)
 
+@app.route('/search', methods=['GET', 'POST'])
+def search_question():
+    founded_question = {}
+
+    if request.method == 'POST':
+
+        search_massage = request.form['search_message']
+        print(search_massage)
+        founded_question = logic.search_question_logic(search_massage.lower())
+        print(founded_question)
+    try:
+        return render_template("q_list.html", list_of_dict_on_main = founded_question['founded_questions'], headers=founded_question['columns'])
+    except Exception as e:
+        return render_template("500.html", error=e)
+
 
 '''
 @app.route('/question/<q_id>', methods=['GET', 'POST'])

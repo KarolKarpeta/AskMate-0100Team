@@ -66,6 +66,14 @@ def check_length_message_question_db(inputs):
 
 
 
+# ------------------- SEARCH QUESTION -------------------------------------
+
+def search_question_logic(message):
+    try:
+        return data_manager.search_question_db(message)   #get_answers_by_question_id_dbm(q_id, message)
+    except FileNotFoundError as e:
+        # logging.debug(e)
+        return []
 
 
 
