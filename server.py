@@ -67,53 +67,22 @@ def search_question():
         return render_template("500.html", error=e)
 
 
-'''
-@app.route('/question/<q_id>', methods=['GET', 'POST'])
-def question(q_id):
-    print("TUTAJ")
-    
-    list_of_dict = persistence.import_from_file("sample_data/question.csv")
+@app.route('/answer/<int:a_id>/delete', methods=['GET', 'POST'])
+def delete_answer(a_id):
+    if request.method == 'POST':
+        question = logic.get_all_answers()
+        for dic in question:
+            if dic['id'] == a_id:
+                q_id = dic['question_id']
+        logic.delete_answer_logic(a_id)
+    try:
+        return redirect("/question/" + str(q_id))
+    except Exception as e:
+        return render_template("500.html", error=e)
 
-    answers_by_id = logic.get_answers_by_id(q_id)
-
-    a_headers = persistence.import_headers("sample_data/answer.csv")
-    del a_headers[0]
-    del a_headers[2]
-    del a_headers[3]
-
-    if request.method == 'GET':
-        for quest in list_of_dict:
-            if quest['id'] == q_id:
-                return render_template("question.html", quest=quest, answers_by_id=answers_by_id, a_headers=a_headers,
-                                       message="")
-
-    elif request.method == 'POST':
-        print("kuku")
-        answer_message = request.form["answer"]
-        print(answer_message)
-
-        message = logic.check_answer_message_length(answer_message, q_id)
-        if str(message) == "Correct":
-            print("correct")
-            return redirect("/question/" + str(q_id))
-        else:
-            for quest in list_of_dict:
-                if quest['id'] == q_id:
-                    print("not correct")
-                    return render_template("question.html", quest=quest, answers_by_id=answers_by_id,
-                                           a_headers=a_headers, message=message)
-                                           
-                                           
-                                           
-                        {% for key, value in row.items() %} from question.html TO DELETE !!!!!!!!!!!
-                            {% if key in a_headers %}
-                                <td>{{ value }}</td>
-                            {% endif %}
-                        {% endfor %}
-'''
 
 if __name__ == '__main__':
     app.run(
         port=5000,
-        # debug=True,
+        debug=True,
     )

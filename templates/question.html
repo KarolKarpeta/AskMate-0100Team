@@ -50,6 +50,7 @@
                         <td>{{ row['submission_time'] }}</td>
                         <td>{{ row['vote_number'] }}</td>
                         <td>{{ row['message'] }}</td>
+                        <td><form action='{{ url_for("delete_answer", a_id = row["id"]) }}' method="POST"><button type="submit">DELETE</button></a></td>
                     </tr>
                 {% endfor %}
 
@@ -58,7 +59,7 @@
 
             <p><label for="message">Post Answer:</label></p>
 
-            <form action='{{ url_for('question', q_id = quest["id"]) }}' method="POST">
+            <form action='{{ url_for("question", q_id = quest["id"]) }}' method="POST">
                 <textarea id='answer' name='answer' rows="5" style = "width : 100%" >write here .....</textarea>
                 <p><button type="submit" name="add_answer" value="add_row">ANSWER</button></p>
             </form>
