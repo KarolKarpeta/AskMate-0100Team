@@ -40,16 +40,31 @@ def question(q_id):
         return render_template("question.html", quest=one_question['question_by_id'], answers_by_id=answers_by_question_id['answers_by_question_id'], a_headers=answers_by_question_id['columns'],  message="")
 
     elif request.method == 'POST':
-        answer_message = request.form["answer"]
-        communicate =  logic.check_answer_length_logic(answer_message) # check_answer_message_length(answer_message, q_id)
 
-        if str(communicate) == "Correct":
-            logic.add_new_answer_logic(q_id, answer_message) # insert
-            return redirect("/question/" + str(q_id))
-        else:
-            return render_template("question.html", quest=one_question['question_by_id'],
+            answer_message = request.form["answer"]
+            communicate = logic.check_answer_length_logic(answer_message) # check_answer_message_length(answer_message, q_id)
+
+            if str(communicate) == "Correct":
+                logic.add_new_answer_logic(q_id, answer_message) # insert
+                return redirect("/question/" + str(q_id))
+            else:
+                return render_template("question.html", quest=one_question['question_by_id'],
                                            answers_by_id=answers_by_question_id['answers_by_question_id'],
                                            a_headers=answers_by_question_id['columns'], message=communicate)
+
+
+
+@app.route('/new-comment', methods=['POST'])
+def comment(q_id):
+
+    one_question = logic.get_question_by_id_logic(q_id)
+    comments_by_question_id = logic.get_comments_by_id_logic(q_id)
+
+    comment_message = request.form["comment"]
+    logic.add_new_comment_logic(q_id, comment_message)
+    return render_template("question.html", quest=one_question['question_by_id'],
+                            comments_by_id=comments_by_question_id['comments_by_question_id'],
+                            a_headers=comments_by_question_id['columns'])
 
 # id,submission_time,vote_number,question_id,message,image
 
@@ -100,11 +115,6 @@ def question(q_id):
 
 if __name__ == '__main__':
     app.run(
-<<<<<<< HEAD
-        port=5001,
-        debug=True,
-=======
         port=5000,
-        # debug=True,
->>>>>>> 7adadce54c8f3267fafbfa309a022a1ff7ddcb37
+        debug=True
     )

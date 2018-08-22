@@ -33,6 +33,13 @@ def get_answers_by_id_logic(id): # get list of dictionaries, all answers by q_id
         return []
 
 
+def get_comments_by_id_logic(id):
+    try:
+        return data_manager.get_comments_by_question_id_dbm(id)
+    except FileNotFoundError as e:
+        return []
+
+
 
 
 
@@ -52,6 +59,13 @@ def add_new_answer_logic(q_id, message): # insert new answer with exact question
         # logging.debug(e)
         return []
 
+
+def add_new_comment_logic(q_id, message):
+    try:
+        return data_manager.add_new_comment_db(q,id, message)
+    except FileNotFoundError as e:
+        # logging.debug(e)
+        return []
 
 
 
