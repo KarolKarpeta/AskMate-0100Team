@@ -101,5 +101,8 @@ def delete_answer_db(cursor, a_id):
 
 @database_common.connection_handler 
 def delete_question_db(cursor, q_id):
-    cursor.execute("""DELETE FROM question WHERE id = {};""".format(a_id))
+    cursor.execute("""DELETE FROM question WHERE id = {};""".format(q_id))
 
+@database_common.connection_handler 
+def delete_answer_db_by_q_id(cursor, q_id):
+    cursor.execute("""DELETE FROM answer WHERE question_id = {};""".format(q_id))
