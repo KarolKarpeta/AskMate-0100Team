@@ -7,12 +7,9 @@ app = Flask(__name__)
 @app.route('/list', methods=['GET', 'POST'])
 def get_list():
     if request.method == 'GET':
-        # list_of_dict = persistence.import_from_file("sample_data/question.csv")
-        # list_of_dict_on_main = util.get_headers_on_main_site(list_of_dict)
-        # list_of_dict_on_main.reverse()
-        # headers = persistence.import_headers("sample_data/question.csv")
 
         questions_and_headers = logic.get_all_questions()
+
         try:
             return render_template("q_list.html", list_of_dict_on_main=questions_and_headers['all_questions'], headers=questions_and_headers['columns'])
         except Exception as e:
@@ -24,35 +21,44 @@ def get_list():
 def add_question():
     msg = ""
     form_values = {}
-
     if request.method == 'POST':
-        message = logic.check_question_message_length(request.form)
-        if message == "Correct":
-            msg = logic.check_question_message_length(request.form)
+        msg = logic.check_length_message_question_db(request.form)
         form_values = request.form
         if msg == "Correct":
             return redirect("/list")
     return render_template('ask_question.html', message=msg, form=form_values)
 
 
-@app.route('/new_questions', methods=['GET', 'POST'])
-def new_question():
+
+@app.route('/question/<int:q_id>', methods=['GET', 'POST'])
+def question(q_id):
+
+    one_question = logic.get_question_by_id_logic(q_id)
+    answers_by_question_id = logic.get_answers_by_id_logic(q_id)
+
     if request.method == 'GET':
-        return render_template("new_question.html")
+        return render_template("question.html", quest=one_question['question_by_id'], answers_by_id=answers_by_question_id['answers_by_question_id'], a_headers=answers_by_question_id['columns'],  message="")
 
-    if request.method == 'POST':
-        title = request.form['title']
-        message = request.form['message']
-        logic.append_row_to_csv(title, message)
+    elif request.method == 'POST':
+        answer_message = request.form["answer"]
+        communicate =  logic.check_answer_length_logic(answer_message) # check_answer_message_length(answer_message, q_id)
 
-        return redirect('/list')
+        if str(communicate) == "Correct":
+            logic.add_new_answer_logic(q_id, answer_message) # insert
+            return redirect("/question/" + str(q_id))
+        else:
+            return render_template("question.html", quest=one_question['question_by_id'],
+                                           answers_by_id=answers_by_question_id['answers_by_question_id'],
+                                           a_headers=answers_by_question_id['columns'], message=communicate)
 
 # id,submission_time,vote_number,question_id,message,image
 
 
+'''
 @app.route('/question/<q_id>', methods=['GET', 'POST'])
 def question(q_id):
     print("TUTAJ")
+    
     list_of_dict = persistence.import_from_file("sample_data/question.csv")
 
     answers_by_id = logic.get_answers_by_id(q_id)
@@ -82,10 +88,23 @@ def question(q_id):
                     print("not correct")
                     return render_template("question.html", quest=quest, answers_by_id=answers_by_id,
                                            a_headers=a_headers, message=message)
-
+                                           
+                                           
+                                           
+                        {% for key, value in row.items() %} from question.html TO DELETE !!!!!!!!!!!
+                            {% if key in a_headers %}
+                                <td>{{ value }}</td>
+                            {% endif %}
+                        {% endfor %}
+'''
 
 if __name__ == '__main__':
     app.run(
+<<<<<<< HEAD
         port=5001,
         debug=True,
+=======
+        port=5000,
+        # debug=True,
+>>>>>>> 7adadce54c8f3267fafbfa309a022a1ff7ddcb37
     )
