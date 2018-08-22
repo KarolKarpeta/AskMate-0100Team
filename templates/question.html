@@ -59,8 +59,8 @@
 
             <p><label for="message">Post Answer:</label></p>
 
-            <form action='{{ url_for("question", q_id = quest["id"]) }}' method="POST">
-                <textarea id='answer' name='answer' rows="5" style = "width : 100%" >write here .....</textarea>
+            <form action='{{ url_for("new_answer", q_id = quest["id"]) }}' method="POST">
+                <textarea id='answer' name='answer' placeholder="START WRITING YOUR ANSWER HERE ......." rows="5" style = "width : 100%" ></textarea>
                 <p><button type="submit" name="add_answer" value="add_row">ANSWER</button></p>
             </form>
             <h3>{{message}}</h3>

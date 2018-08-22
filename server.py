@@ -33,6 +33,47 @@ def add_question():
 @app.route('/question/<int:q_id>', methods=['GET', 'POST'])
 def question(q_id):
 
+    if request.method == 'POST':
+        print("gdzies post z question")
+
+    q_views = logic.get_question_view_logic(q_id)
+    one_question = logic.get_question_by_id_logic(q_id)
+    answers_by_question_id = logic.get_answers_by_id_logic(q_id)
+
+    print(q_views)
+    return render_template("question.html", quest=one_question['question_by_id'],
+                           answers_by_id=answers_by_question_id['answers_by_question_id'],
+                           a_headers=answers_by_question_id['columns'],  message="")
+
+
+
+@app.route('/new_answer/<int:q_id>', methods=['GET', 'POST']) #
+def new_answer(q_id):
+    if request.method == 'POST':
+        answer_message = request.form["answer"]
+        one_question = logic.get_question_by_id_logic(q_id)
+        answers_by_question_id = logic.get_answers_by_id_logic(q_id)
+
+        communicate =  logic.check_answer_length_logic(answer_message) # check_answer_message_length(answer_message, q_id)
+
+        if str(communicate) == "Correct":
+            logic.add_new_answer_logic(q_id, answer_message) # insert
+            answers_by_question_id = logic.get_answers_by_id_logic(q_id)
+            print("dodało pytanie ")
+            return render_template("question.html", quest=one_question['question_by_id'],
+                                   answers_by_id=answers_by_question_id['answers_by_question_id'],
+                                   a_headers=answers_by_question_id['columns'], message="")
+            #return redirect("/question/" + str(q_id))
+        else:
+            return render_template("question.html", quest=one_question['question_by_id'],
+                                           answers_by_id=answers_by_question_id['answers_by_question_id'],
+                                           a_headers=answers_by_question_id['columns'], message=communicate)
+
+''' COPY
+
+@app.route('/question/<int:q_id>', methods=['GET', 'POST'])
+def question(q_id):
+
     q_views = logic.get_question_view_logic(q_id)
 
     one_question = logic.get_question_by_id_logic(q_id)
@@ -54,6 +95,11 @@ def question(q_id):
                                            answers_by_id=answers_by_question_id['answers_by_question_id'],
                                            a_headers=answers_by_question_id['columns'], message=communicate)
 
+
+'''
+
+
+
 @app.route('/search', methods=['GET', 'POST'])
 def search_question():
     founded_question = {}
@@ -65,11 +111,13 @@ def search_question():
         founded_question = logic.search_question_logic(search_massage.lower())
         print(founded_question)
     try:
-        return render_template("q_list.html", list_of_dict_on_main = founded_question['founded_questions'], headers=founded_question['columns'])
+        return render_template("q_list.html", list_of_dict_on_main = founded_question['founded_questions'],
+                               headers=founded_question['columns'])
     except Exception as e:
         return render_template("500.html", error=e)
 
-@app.route('/question/<int:a_id>/delete', methods=['GET', 'POST'])
+
+@app.route('/question/<int:q_id>/delete', methods=['GET', 'POST'])
 def delete_question(q_id):
     if request.method == 'POST':
         question = logic.get_all_answers()
@@ -81,6 +129,7 @@ def delete_question(q_id):
         return redirect("/question/" + str(q_id))
     except Exception as e:
         return render_template("500.html", error=e)
+
 
 @app.route('/answer/<int:a_id>/delete', methods=['GET', 'POST'])
 def delete_answer(a_id):
