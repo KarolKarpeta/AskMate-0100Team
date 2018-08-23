@@ -2,54 +2,32 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <style>
-                table { border: 1px solid black;      }
-                body {background-color: rgb(241, 237, 234);}
-                h1 {font-family: sans-serif}
-
-                th {
-                    border: 1px solid #999;
-                    padding: 0.1em 1em;
-                    word-wrap: break-word;
-                    font-size: 130%
-                }
-                td {
-                    border: 1px solid #999;
-                    padding: 0.1em 1em;
-                    word-wrap: break-word;
-                    
-                }
-
-        </style>
         <title>Ask Mate</title>
-        <link rel="stylesheet" type="text/css" href="static/layout.css">
-
-       <div class="topnav">
-            <div class="search-container">
-                <form action='{{ url_for('search_question') }}' method="POST">
-                  <input type="text" placeholder="Search.." name="search_message">
-                  <button type="submit">SEARCH</button>
-                </form>
-            </div>
-       </div>
-
-
+        <link rel="stylesheet" type="text/css" href='{{url_for("static",filename="layout.css")}}'>
 
     </head>
         <body>
+                <div class="topnav">
+                        <div class="search-container">
+                            <form action="{{ url_for('search_question') }}" method="POST">
+                              <input type="text" placeholder="Search.." name="search_message">
+                              <button type="submit">SEARCH</button>
+                            </form>
+                        </div>
+                   </div>
+            
             <h1>Ask Mate - Questions</h1>
 
-            <label for="add"> Click for this button to add question </label> <br>
             <p><a href="/new-question"> <input type="button" value="ADD NEW QUESTION" name = "add"></a></p>
 
 
-            <table style="width:100%">
+            <table>
                 <!-- HEADERSY DO TABELI -->
                  <!-- ID  -->
-                <th width="1">{{ headers.0 }}</th> <!-- submission_time  -->
-                <th width="2%">{{ headers.1 }}</th> <!-- Title  -->
-                <th width="80%">{{ headers.4 }}</th>
-                <th width="1%">{{ headers.2 }}</th><!-- Views  -->
+                <th>{{ headers.0 }}</th> <!-- submission_time  -->
+                <th>{{ headers.1 }}</th> <!-- Title  -->
+                <th>{{ headers.4 }}</th>
+                <th>{{ headers.2 }}</th><!-- Views  -->
 
                 <!-- #petla wpisujaca wartosci -->
                 {% for row in list_of_dict_on_main %}
