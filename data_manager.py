@@ -101,6 +101,9 @@ def add_new_comment_db(cursor, q_id, message):
                     VALUES('{}', {}, '{}');
                     """.format(submission_time, q_id, message))
     return cursor.rowcount
+
+
+
 @database_common.connection_handler # add new answer and question ID
 def search_question_db(cursor, message):
     cursor.execute ("""SELECT DISTINCT(q.id), q.submission_time, q.view_number, q.vote_number, q.title, q.message, q.image 

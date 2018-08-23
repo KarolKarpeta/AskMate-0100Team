@@ -45,3 +45,19 @@
   cursor: pointer;
 }
 
+      table { border: 1px solid black;      }
+      body {background-color: rgb(240, 216, 200);}
+      h1 {font-family: sans-serif}
+
+      th {
+          border: 1px solid #999;
+          padding: 0.1em 1em;
+          word-wrap: break-word;
+          font-size: 130%
+          }
+      td {
+          border: 1px solid #999;
+          padding: 0.1em 1em;
+          word-wrap: break-word;
+
+          }

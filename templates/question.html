@@ -3,26 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
-    <style>
-                table { border: 1px solid black;      }
-                body {background-color: rgb(240, 216, 200);}
-                h1 {font-family: sans-serif}
-
-                th {
-                    border: 1px solid #999;
-                    padding: 0.1em 1em;
-                    word-wrap: break-word;
-                    font-size: 130%
-                }
-                td {
-                    border: 1px solid #999;
-                    padding: 0.1em 1em;
-                    word-wrap: break-word;
-
-                }
-
-        </style>
+    <link rel='stylesheet' href='static/layout.css' type='text/css' />
 </head>
 <body>
 
@@ -51,14 +32,15 @@
                 <td>{{ row['message'] }}</td>
             </tr>
         {% endfor %}
+    </table>
 
         <form action='{{ url_for('comment', q_id = quest["id"]) }}' method="POST">
-            <textarea id='comment' name='comment' rows="2" style = "width : 100%" >write here .....</textarea>
+            <textarea id='comment' name='comment' rows="2" style = "width : 100%" placeholder="START WRITING YOUR COMENTS HERE ......."> </textarea>
             <p><button type="submit" name="add_comment" value="add_row">COMMENT</button></p>
         </form>
 
 
-    </table>
+
     <h2>ANSWERS</h2>
     <table style="width:100%">
                 <!-- HEADERSY DO TABELI id,submission_time,vote_number,question_id,message,image -->
