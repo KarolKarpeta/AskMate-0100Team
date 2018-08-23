@@ -1,12 +1,6 @@
 table {
-    border: 3px;
+    border: 1px solid black;
   }
-
-body {
-    background-color: rgb(241, 237, 234);
-}
-
-h1 {font-family: sans-serif}
 
 th {
     border: 1px solid #999;
