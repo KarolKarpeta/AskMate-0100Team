@@ -3,38 +3,46 @@ body {
   background-color: rgb(240, 216, 200);
   font-family: 'Righteous', cursive;
 }
-
+/*ask_question file css */
 #container
 {
-  width: 1000px;
+  width: 500px;
   margin-left: auto;
   margin-right: auto;
-
-
+  background-color:white;
+  border: 5px solid #1C6EA4;
+  border-radius: 22px;
 
 }
 
 #title1
 {
-  font-weight: 900
-
+  font-weight: 900;
+  text-align:center
   
 }
 
 #label1
 {
 
-
+  text-align:center
   
 }
 
 .button1
 {
+  margin: 0 auto;
   float:left;
 
-  
+
 }
-th {
+/*end of ask_question file css */
+
+
+
+
+/*
+ th {
     border: 1px solid #999;
     padding: 0.1em 1em;
     word-wrap: break-word;
@@ -45,12 +53,37 @@ td {
     padding: 0.1em 1em;
     word-wrap: break-word;
 
-    }
+    } 
+*/
+    #tab_questions {
+      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+  }
+  
+  #tab_questions td, #tab_questions th {
+      border: 1px solid #ddd;
+      padding: 8px;
+  }
+  
+  #tab_questions tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #tab_questions tr:hover {background-color: #ddd;}
+  
+  #tab_questions th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #4CAF50;
+      color: white;
+      border: 3px solid black;
+  }
 
 
 .topnav {
   overflow: hidden;
-  background-color: #e9e9e9;
+  background-color: #f6faf9;
+  border: 3px solid black;      
 }
 
 .topnav a {
@@ -89,9 +122,9 @@ td {
   padding: 6px;
   margin-top: 8px;
   margin-right: 16px;
-  background: #ddd;
+  background: rgb(234, 240, 239);
   font-size: 17px;
-  border: none;
+  border: 1 solid rgb(0, 3, 3);
   cursor: pointer;
 }
 

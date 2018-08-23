@@ -22,14 +22,15 @@
             <p><a href="/new-question"> <input type="button" value="ADD NEW QUESTION" name = "add"></a></p>
 
 
-            <table>
+            <table id='tab_questions'>
                 <!-- HEADERSY DO TABELI -->
                  <!-- ID  -->
+                <tr>
                 <th>{{ headers.0 }}</th> <!-- submission_time  -->
                 <th>{{ headers.1 }}</th> <!-- Title  -->
                 <th>{{ headers.4 }}</th>
                 <th>{{ headers.2 }}</th><!-- Views  -->
-
+            </tr>
                 <!-- #petla wpisujaca wartosci -->
                 {% for row in list_of_dict_on_main %}
                     <tr>
