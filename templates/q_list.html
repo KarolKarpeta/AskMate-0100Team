@@ -22,6 +22,19 @@
 
         </style>
         <title>Ask Mate</title>
+        <link rel="stylesheet" type="text/css" href="static/layout.css">
+
+       <div class="topnav">
+            <div class="search-container">
+                <form action='{{ url_for('search_question') }}' method="POST">
+                  <input type="text" placeholder="Search.." name="search_message">
+                  <button type="submit">SEARCH</button>
+                </form>
+            </div>
+       </div>
+
+
+
     </head>
         <body>
             <h1>Ask Mate - Questions</h1>
@@ -55,17 +68,6 @@
                         <td> <a href="{{ url_for('question', q_id = row["id"]) }}">{{ row['submission_time'] }} </a> </td>
                         <td style="text-align : center">{{row['title']}}</td>
 
-
-
-
-
-                        <!-- {% for key, value in row.items() %}
-                            {% if key == "title" %}
-                                <td>   <a href="{{ url_for('question', q_id = row["id"]) }}"> {{ value }} </a> </td>
-                            {% else %}
-                                <td>{{ value }}</td>
-                            {% endif %}
-                        {% endfor %} -->
                     </tr>
                 {% endfor %}
 

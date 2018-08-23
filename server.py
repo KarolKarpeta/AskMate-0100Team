@@ -35,9 +35,10 @@ def question(q_id):
 
     one_question = logic.get_question_by_id_logic(q_id)
     answers_by_question_id = logic.get_answers_by_id_logic(q_id)
+    comments_by_question_id = logic.get_comments_by_id_logic(q_id)
 
     if request.method == 'GET':
-        return render_template("question.html", quest=one_question['question_by_id'], answers_by_id=answers_by_question_id['answers_by_question_id'], a_headers=answers_by_question_id['columns'],  message="")
+        return render_template("question.html", quest=one_question['question_by_id'], answers_by_id=answers_by_question_id['answers_by_question_id'], comments_by_id=comments_by_question_id['comments_by_question_id'], a_headers=answers_by_question_id['columns'],  message="")
 
     elif request.method == 'POST':
 
@@ -52,9 +53,24 @@ def question(q_id):
                                            answers_by_id=answers_by_question_id['answers_by_question_id'],
                                            a_headers=answers_by_question_id['columns'], message=communicate)
 
+@app.route('/search', methods=['GET', 'POST'])
+def search_question():
+    founded_question = {}
+
+    if request.method == 'POST':
+
+        search_massage = request.form['search_message']
+        print(search_massage)
+        founded_question = logic.search_question_logic(search_massage.lower())
+        print(founded_question)
+    try:
+        return render_template("q_list.html", list_of_dict_on_main = founded_question['founded_questions'], headers=founded_question['columns'])
+    except Exception as e:
+        return render_template("500.html", error=e)
 
 
-@app.route('/new-comment', methods=['POST'])
+
+@app.route('/new-comment/<int:q_id>', methods=['POST'])
 def comment(q_id):
 
     one_question = logic.get_question_by_id_logic(q_id)
@@ -62,9 +78,8 @@ def comment(q_id):
 
     comment_message = request.form["comment"]
     logic.add_new_comment_logic(q_id, comment_message)
-    return render_template("question.html", quest=one_question['question_by_id'],
-                            comments_by_id=comments_by_question_id['comments_by_question_id'],
-                            a_headers=comments_by_question_id['columns'])
+    #  return redirect('/question/<int:q_id>')
+    return redirect("/question/" + str(q_id))
 
 # id,submission_time,vote_number,question_id,message,image
 
