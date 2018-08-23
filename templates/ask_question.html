@@ -3,25 +3,37 @@
     <head>
         <meta charset="utf-8">
         <title>Ask Mate - Add New Question</title>
+        <link rel="stylesheet" type="text/css" href='{{url_for("static",filename="layout.css")}}'>
+        <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
     </head>
         <body>
-        <p><a href="/list"> <input type="button" value="BACK" name = "add"></a></p>
+        <div id="container"
+        
+            
+                <div id='title1'>
+                    <h1>Add New Question</h1>
+                    {% if message %}
+                        <h3>{{message}}</h3>
+                    {% endif %}
+                </div>
+                <div id='label1'>
+                    <form action="/new-question" method="post">
+                        {% if form %}
+                        <p><label for="title">Title</label></p> <input id='title' name='title' type="text" value='{{form['title']}}'>
+                        <p><label for="message">Message</label></p>
+                            <textarea id='message' name='message' rows="10" cols="40">{{form['message']}}</textarea>
+                        {% else %}
+                        <p><label for="title">Title</label></p> <input id='title' name='title' type="text">
+                        <p><label for="message">Message</label></p>
+                            <textarea id='message' name='message' rows="10" cols="40"></textarea>
+                        {% endif %}
+                </div>
+                <div class='button1'><p><button type="submit">ADD QUESTION</button></p></div>
 
-            <h1>Add New Question</h1>
-            {% if message %}
-                <h3>{{message}}</h3>
-            {% endif %}
-            <form action="/new-question" method="post">
-                {% if form %}
-                <p><label for="title">Title</label></p> <input id='title' name='title' type="text" value='{{form['title']}}'>
-                <p><label for="message">Message</label></p>
-                    <textarea id='message' name='message' rows="10" cols="40">{{form['message']}}</textarea>
-                {% else %}
-                <p><label for="title">Title</label></p> <input id='title' name='title' type="text">
-                <p><label for="message">Message</label></p>
-                    <textarea id='message' name='message' rows="10" cols="40"></textarea>
-                {% endif %}
-                <p><button type="submit">ADD QUESTION</button></p>
-            </form>
+                <div class='button1'><p><a href="/list"> <input type="button" value="BACK" name = "add"></a></p></div>
+                <div style="clear:both"></div>
+                
+                </form>
+        </div>
         </body>
 </html>
