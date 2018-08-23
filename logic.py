@@ -9,10 +9,12 @@ def get_all_questions(): # get list of dictionaries, list of all questions
         # logging.debug(e)
         return []
 
-
-
-
-
+def get_all_answers(): # get list of dictionaries, list of all questions
+    try:
+        return data_manager.get_all_answers()
+    except FileNotFoundError as e:
+        # logging.debug(e)
+        return []
 
 # ------------------- DISPLAY QUESTION-------------------------------------
 
@@ -41,9 +43,7 @@ def get_comments_by_id_logic(id):
 
 
 
-
-
-# ------------------- iNSERT ANSWER -------------------------------------
+# ------------------- INSERT ANSWER -------------------------------------
 def check_answer_length_logic(message):
     if util.correct_length(message, ">=", 10):
         # data_manager.add_new_question(inputs['title'],inputs['message'])
@@ -59,6 +59,14 @@ def add_new_answer_logic(q_id, message): # insert new answer with exact question
         # logging.debug(e)
         return []
 
+# ------------------- DELETE ANSWER || DELETE QUESTION-------------------------------------
+def delete_answer_logic(a_id): # delete answer with exact answer _id
+    try:
+        return data_manager.delete_answer_db(a_id)   #delete_answers_by_answers_id_dbm(a_id)
+    except FileNotFoundError as e:
+        # logging.debug(e)
+        return []
+
 
 def add_new_comment_logic(q_id, message):
     try:
@@ -67,6 +75,20 @@ def add_new_comment_logic(q_id, message):
         # logging.debug(e)
         return []
 
+def delete_question_logic(q_id): # delete questionwith exact question _id
+    try:
+        return data_manager.delete_question_db(q_id)   #delete_question_by_question_id_dbm(q_id)
+    except FileNotFoundError as e:
+        # logging.debug(e)
+        return []
+
+
+def delete_answer_logic_by_q_id(q_id):
+    try:
+        return data_manager.delete_answer_db_by_q_id(q_id)
+    except FileNotFoundError as e:
+        # logging.debug(e)
+        return []
 
 
 # ------------------- INSERT QUESTION -------------------------------------
@@ -90,65 +112,17 @@ def search_question_logic(message):
         return []
 
 
+# ------------------- QUESTION VIEWS -------------------------------------
+def get_question_view_logic(q_id):
+    try:
+        return data_manager.get_question_views_db(q_id)   #get_answers_by_question_id_dbm(q_id, message)
+    except FileNotFoundError as e:
+        # logging.debug(e)
+        return []
 
-
-
-# old functions down
-'''
-
-def check_question_message_length(inputs):
-    # chceck if the message length isnt shorter than 10 chars and write data to file
-    new_data = {}
-    if util.correct_length(inputs['message'], ">=", 10):
-        new_data = {
-            "title" : inputs['title'],
-            "message" : inputs['message'],
-            "id" : util.generate_id(),
-            "submission_time" : util.generate_time_in_UNIX(),
-            "view_number" : 0,
-            "vote_number" :0,
-            "image" : inputs.get("image")
-        } 
-        persistence.write_data_to_file("sample_data/question.csv", persistence.q_headers, new_data)
-        return "Correct"
-    else:
-        return "Your message is too short. (Must be at least 10 characters long)"
-
-# id,submission_time,vote_number,question_id,message,image
-
-
-def append_row_to_csv(title, message):
-    data = util.prepare_list_to_save_to_the_file(title, message)
-    print("logic_add_question")
-    persistence.export_data_to_file("sample_data/question.csv", data)
-
-
-
-def check_answer_message_length(message, q_id):
-    new_data = {}
-    if util.correct_length(message, ">=", 10):
-        new_data = {
-            "id": util.generate_id(),
-            "submission_time": util.generate_time_in_UNIX(),
-            "vote_number": 0,
-
-            "question_id": q_id,
-
-            "message": message,
-            "image": "blank",
-            }
-        persistence.write_data_to_file("sample_data/answer.csv", persistence.a_headers, new_data)
-        return "Correct"
-    else:
-        return "Your message is too short. (Must be at least 10 characters long)"
-
-
-
-def get_answers_by_id(q_id):
-    all_answers = persistence.import_from_file("sample_data/answer.csv")
-    answers_by_id = []
-    for row in all_answers:
-        if row["question_id"] == q_id:
-            answers_by_id.append(row)
-    return answers_by_id
-'''
+def set_question_view_logic(q_id, views_number):
+    try:
+        return data_manager.set_question_views_db(q_id, views_number)   #get_answers_by_question_id_dbm(q_id, message)
+    except FileNotFoundError as e:
+        # logging.debug(e)
+        return []

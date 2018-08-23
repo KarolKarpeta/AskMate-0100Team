@@ -4,7 +4,7 @@ import util
 @database_common.connection_handler # Get all questions from database
 def get_all_questions(cursor):
 
-    cursor.execute("""SELECT * FROM question; """)  # get question data
+    cursor.execute("""SELECT * FROM question order by submission_time desc ; """)  # get question data
     all_questions = cursor.fetchall()
 
     columns = [column[0] for column in cursor.description] # get headers
@@ -15,6 +15,11 @@ def get_all_questions(cursor):
 
     return result  # return questions with headers
 
+@database_common.connection_handler 
+def get_all_answers(cursor):
+    cursor.execute("""SELECT * FROM answer; """) 
+    all_questions = cursor.fetchall()
+    return all_questions 
 
 @database_common.connection_handler # get one questions by ID
 def get_questions_by_id_dbm(cursor, q_id):
@@ -33,8 +38,7 @@ def get_questions_by_id_dbm(cursor, q_id):
 
 @database_common.connection_handler # get all answers connected to questions by ID
 def get_answers_by_question_id_dbm(cursor, q_id):
-    print("hej", q_id)
-    cursor.execute("""SELECT * FROM answer where question_id = {}; """.format(q_id))  # get answers data
+    cursor.execute("""SELECT * FROM answer where question_id = {} order by submission_time; """.format(q_id))  # get answers data
     answers_by_question_id = cursor.fetchall()
 
     columns = [column[0] for column in cursor.description] # get headers
@@ -115,52 +119,29 @@ def search_question_db(cursor, message):
     return result  # return questions with headers
 
 
+# -------------------------- DELETE QUESTION --------------------
+@database_common.connection_handler # BARDZO WAZNA FUNKCJA PROSZE NIE RUSZAC
+def delete_answer_db(cursor, a_id):
+    cursor.execute("""DELETE FROM answer WHERE id = {};""".format(a_id))
+
+@database_common.connection_handler # BARDZO WAZNA FUNKCJA PROSZE NIE RUSZAC
+def delete_question_db(cursor, q_id):
+    cursor.execute("""DELETE FROM question WHERE id = {};""".format(q_id))
+
+@database_common.connection_handler # BARDZO WAZNA FUNKCJA PROSZE NIE RUSZAC
+def delete_answer_db_by_q_id(cursor, q_id):
+    cursor.execute("""DELETE FROM answer WHERE question_id = {};""".format(q_id))
 
 
-
-
-# old functions down
-'''
+# -------------------------- QUESTION VIEWS --------------------
 
 @database_common.connection_handler
-def get_mentor_names_by_first_name(cursor, first_name):
-    cursor.execute("""SELECT first_name, last_name FROM mentors  WHERE first_name = %(first_name)s ORDER BY first_name; """, {'first_name': first_name})
-    names = cursor.fetchall()
-    return names
-
+def get_question_views_db(cursor, q_id):
+    cursor.execute("""select view_number FROM question WHERE id = {};""".format(q_id))
+    view_number = cursor.fetchone()
+    return view_number
 
 @database_common.connection_handler
-def get_mentor_first_name_lastname(cursor):
-    result = {}
-    cursor.execute("""
-                    SELECT first_name, last_name FROM mentors
-                    ORDER BY first_name;
-                    """)
-    mentor_names = cursor.fetchall()
-    # (Optional) Get a list of the column names returned from the query:
-    columns = [column[0] for column in cursor.description]
+def set_question_views_db(cursor, q_id, views_number):
+    cursor.execute("""UPDATE question SET view_number  = {} WHERE id = {};""".format(views_number, q_id))
 
-    result['mentor_names'] = mentor_names
-    result['columns'] = columns
-
-    return result
-
-
-
-@database_common.connection_handler_insert_delete  # insert
-def insert_student_Markus_Schaffarzyk(cursor):
-    # result = {}
-    cursor.execute("""
-                    INSERT INTO applicants
-                    (first_name, last_name, phone_number, email, application_code)
-                    VALUES ('Markus', 'Schaffarzyk', '003620/725-2666', 'djnovus@groovecoverage.com', 54823);
-                    """)
-    # Markus = cursor.fetchall()
-    # (Optional) Get a list of the column names returned from the query:
-    # columns = [column[0] for column in cursor.description]
-
-    # result['Markus'] = Markus
-    # result['columns'] = columns
-
-    return cursor.rowcount
-'''
