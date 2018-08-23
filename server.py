@@ -72,35 +72,6 @@ def new_answer(q_id):
                                            answers_by_id=answers_by_question_id['answers_by_question_id'],
                                            a_headers=answers_by_question_id['columns'], message=communicate)
 
-''' COPY
-
-@app.route('/question/<int:q_id>', methods=['GET', 'POST'])
-def question(q_id):
-
-    q_views = logic.get_question_view_logic(q_id)
-
-    one_question = logic.get_question_by_id_logic(q_id)
-    answers_by_question_id = logic.get_answers_by_id_logic(q_id)
-
-    if request.method == 'GET':
-        print(q_views)
-        return render_template("question.html", quest=one_question['question_by_id'], answers_by_id=answers_by_question_id['answers_by_question_id'], a_headers=answers_by_question_id['columns'],  message="")
-
-    elif request.method == 'POST':
-        answer_message = request.form["answer"]
-        communicate =  logic.check_answer_length_logic(answer_message) # check_answer_message_length(answer_message, q_id)
-
-        if str(communicate) == "Correct":
-            logic.add_new_answer_logic(q_id, answer_message) # insert
-            return redirect("/question/" + str(q_id))
-        else:
-            return render_template("question.html", quest=one_question['question_by_id'],
-                                           answers_by_id=answers_by_question_id['answers_by_question_id'],
-                                           a_headers=answers_by_question_id['columns'], message=communicate)
-
-
-'''
-
 
 
 @app.route('/search', methods=['GET', 'POST'])
@@ -127,6 +98,7 @@ def delete_question(q_id):
         for dic in answer:
             if dic['question_id'] == q_id:
                 logic.delete_answer_logic_by_q_id(q_id)
+                
         logic.delete_question_logic(q_id)
     try:
         return redirect("/list")
