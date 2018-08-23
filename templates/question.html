@@ -34,6 +34,32 @@
         <h3>  {{ quest["title"] }} </h3>
         <p> {{ quest["message"] }} </p>
 
+    <h4>Comments to Question</h4>
+
+    <table style="width:100%">
+        <!-- HEADERSY DO TABELI id,submission_time,vote_number,question_id,message,image -->
+
+        <!-- id  -->
+        <th width="3%">Submission time</th> <!-- submission_time  -->
+        <th width="80%">COMMENT</th> <!-- vote_number  -->
+         
+
+        <!-- #petla!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! wpisujaca wartosci -->
+        {% for row in comments_by_id %}
+            <tr>
+                <td>{{ row['submission_time'] }}</td>
+                <td>{{ row['message'] }}</td>
+            </tr>
+        {% endfor %}
+
+        <form action='{{ url_for('comment', q_id = quest["id"]) }}' method="POST">
+            <textarea id='comment' name='comment' rows="2" style = "width : 100%" >write here .....</textarea>
+            <p><button type="submit" name="add_comment" value="add_row">COMMENT</button></p>
+        </form>
+
+
+    </table>
+    <h2>ANSWERS</h2>
     <table style="width:100%">
                 <!-- HEADERSY DO TABELI id,submission_time,vote_number,question_id,message,image -->
 

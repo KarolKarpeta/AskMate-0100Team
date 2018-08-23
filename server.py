@@ -91,6 +91,21 @@ def search_question():
         return render_template("500.html", error=e)
 
 
+
+@app.route('/new-comment/<int:q_id>', methods=['POST'])
+def comment(q_id):
+
+    one_question = logic.get_question_by_id_logic(q_id)
+    comments_by_question_id = logic.get_comments_by_id_logic(q_id)
+
+    comment_message = request.form["comment"]
+    logic.add_new_comment_logic(q_id, comment_message)
+    #  return redirect('/question/<int:q_id>')
+    return redirect("/question/" + str(q_id))
+
+# id,submission_time,vote_number,question_id,message,image
+
+
 @app.route('/question/<int:q_id>/delete', methods=['GET', 'POST'])
 def delete_question(q_id):
     if request.method == 'POST': # TUTAJ USUNELAM QUESTION BO NIE POT

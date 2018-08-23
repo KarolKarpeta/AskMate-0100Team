@@ -35,6 +35,13 @@ def get_answers_by_id_logic(id): # get list of dictionaries, all answers by q_id
         return []
 
 
+def get_comments_by_id_logic(id):
+    try:
+        return data_manager.get_comments_by_question_id_dbm(id)
+    except FileNotFoundError as e:
+        return []
+
+
 
 # ------------------- INSERT ANSWER -------------------------------------
 def check_answer_length_logic(message):
@@ -60,12 +67,21 @@ def delete_answer_logic(a_id): # delete answer with exact answer _id
         # logging.debug(e)
         return []
 
+
+def add_new_comment_logic(q_id, message):
+    try:
+        return data_manager.add_new_comment_db(q_id, message)
+    except FileNotFoundError as e:
+        # logging.debug(e)
+        return []
+
 def delete_question_logic(q_id): # delete questionwith exact question _id
     try:
         return data_manager.delete_question_db(q_id)   #delete_question_by_question_id_dbm(q_id)
     except FileNotFoundError as e:
         # logging.debug(e)
         return []
+
 
 def delete_answer_logic_by_q_id(q_id):
     try:

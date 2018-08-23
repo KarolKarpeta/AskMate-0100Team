@@ -50,6 +50,21 @@ def get_answers_by_question_id_dbm(cursor, q_id):
     return result  # return questions with headers
 
 
+@database_common.connection_handler
+def get_comments_by_question_id_dbm(cursor, q_id):
+    cursor.execute("""SELECT * FROM comment WHERE question_id = {};
+                    """. format(q_id))
+    comments_by_question_id = cursor.fetchall()
+
+    columns = [column[0] for column in cursor.description]
+
+    result = {}
+    result['comments_by_question_id'] = comments_by_question_id
+    result['columns'] = columns
+
+    return result
+
+
 
 
 
@@ -65,17 +80,27 @@ def add_new_question(cursor, title, message):
     return cursor.rowcount
 
 
-@database_common.connection_handler # add new answer and question ID
+@database_common.connection_handler  # add new answer and question ID
 def add_new_answer_db(cursor, q_id, message):
     time = util.generate_time_in_UNIX()
     submission_time = util.convert_unix_to_time_str(time)
-    cursor.execute ("""
+    cursor.execute("""
                     INSERT INTO answer
                     (submission_time, vote_number, question_id, message)
                     VALUES('{}',0, {}, '{}');""".format(submission_time, q_id, message))
     return cursor.rowcount
 
 
+@database_common.connection_handler
+def add_new_comment_db(cursor, q_id, message):
+    time = util.generate_time_in_UNIX()
+    submission_time = util.convert_unix_to_time_str(time)
+    cursor.execute("""
+                    INSERT INTO comment
+                    (submission_time, question_id, message)
+                    VALUES('{}', {}, '{}');
+                    """.format(submission_time, q_id, message))
+    return cursor.rowcount
 @database_common.connection_handler # add new answer and question ID
 def search_question_db(cursor, message):
     cursor.execute ("""SELECT DISTINCT(q.id), q.submission_time, q.view_number, q.vote_number, q.title, q.message, q.image 
