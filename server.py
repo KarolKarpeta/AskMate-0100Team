@@ -34,9 +34,9 @@ def add_question():
 def question(q_id):
 
     q_views = logic.get_question_view_logic(q_id)
-    print(q_views)
     new_views = int(q_views['view_number']) + 1
-    print(new_views)
+
+    comments_by_question_id = logic.get_comments_by_id_logic(q_id)
 
     logic.set_question_view_logic(q_id, new_views)
 
@@ -46,12 +46,14 @@ def question(q_id):
 
     return render_template("question.html", quest=one_question['question_by_id'],
                            answers_by_id=answers_by_question_id['answers_by_question_id'],
-                           a_headers=answers_by_question_id['columns'],  message="")
+                           a_headers=answers_by_question_id['columns'],  message="", comments_by_id = comments_by_question_id['comments_by_question_id'] )
 
 
 
 @app.route('/new_answer/<int:q_id>', methods=['GET', 'POST']) #
 def new_answer(q_id):
+    comments_by_question_id = logic.get_comments_by_id_logic(q_id)
+
     if request.method == 'POST':
         answer_message = request.form["answer"]
         one_question = logic.get_question_by_id_logic(q_id)
@@ -62,15 +64,14 @@ def new_answer(q_id):
         if str(communicate) == "Correct":
             logic.add_new_answer_logic(q_id, answer_message) # insert
             answers_by_question_id = logic.get_answers_by_id_logic(q_id)
-            print("dodało pytanie ")
             return render_template("question.html", quest=one_question['question_by_id'],
                                    answers_by_id=answers_by_question_id['answers_by_question_id'],
-                                   a_headers=answers_by_question_id['columns'], message="")
+                                   a_headers=answers_by_question_id['columns'], message="", comments_by_id = comments_by_question_id['comments_by_question_id'])
             #return redirect("/question/" + str(q_id))
         else:
             return render_template("question.html", quest=one_question['question_by_id'],
                                            answers_by_id=answers_by_question_id['answers_by_question_id'],
-                                           a_headers=answers_by_question_id['columns'], message=communicate)
+                                           a_headers=answers_by_question_id['columns'], message=communicate, comments_by_id = comments_by_question_id['comments_by_question_id'])
 
 
 
@@ -96,11 +97,10 @@ def search_question():
 def comment(q_id):
 
     one_question = logic.get_question_by_id_logic(q_id)
-    comments_by_question_id = logic.get_comments_by_id_logic(q_id)
+
 
     comment_message = request.form["comment"]
     logic.add_new_comment_logic(q_id, comment_message)
-    #  return redirect('/question/<int:q_id>')
     return redirect("/question/" + str(q_id))
 
 # id,submission_time,vote_number,question_id,message,image
