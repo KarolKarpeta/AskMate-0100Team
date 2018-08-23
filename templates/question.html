@@ -51,14 +51,15 @@
                 <td>{{ row['message'] }}</td>
             </tr>
         {% endfor %}
+    </table>
 
         <form action='{{ url_for('comment', q_id = quest["id"]) }}' method="POST">
-            <textarea id='comment' name='comment' rows="2" style = "width : 100%" >write here .....</textarea>
+            <textarea id='comment' name='comment' rows="2" style = "width : 100%" placeholder="START WRITING YOUR COMENTS HERE ......."> </textarea>
             <p><button type="submit" name="add_comment" value="add_row">COMMENT</button></p>
         </form>
 
 
-    </table>
+
     <h2>ANSWERS</h2>
     <table style="width:100%">
                 <!-- HEADERSY DO TABELI id,submission_time,vote_number,question_id,message,image -->
