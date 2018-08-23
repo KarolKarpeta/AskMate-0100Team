@@ -8,7 +8,7 @@
 
     </head>
         <body>
-            <div id='main_label'>
+            <div class='main_label'>
                 <div class="topnav">
                         <div class="search-container">
                             <form action="{{ url_for('search_question') }}" method="POST">
@@ -31,6 +31,7 @@
                 <th>{{ headers.1 }}</th> <!-- Title  -->
                 <th>{{ headers.4 }}</th>
                 <th>{{ headers.2 }}</th><!-- Views  -->
+                <th>Delete</th><!-- delete  -->
             </tr>
                 <!-- #petla wpisujaca wartosci -->
                 {% for row in list_of_dict_on_main %}
