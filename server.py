@@ -113,6 +113,7 @@ def delete_question(q_id):
         for dic in answer:
             if dic['question_id'] == q_id:
                 logic.delete_answer_logic_by_q_id(q_id)
+                
         logic.delete_question_logic(q_id)
     try:
         return redirect("/list")
