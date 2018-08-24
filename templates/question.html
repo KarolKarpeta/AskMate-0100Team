@@ -10,16 +10,17 @@
 <body>
     <div class='main_label'>
     <p><a href="/list"> <input type="button" value="BACK" name = "add"></a></p>
-    
-    <h1>Display Question</h1><br>
+    <div id='title2'>
+    Display Question<br>
+    </div>
 
-
-
-            <h3>  {{ quest["title"] }} </h3>
+            <div id ='title3'>
+            {{ quest["title"] }}
+            </div>
             <p> {{ quest["message"] }} </p>
-
-        <h4>Comments to Question</h4>
-
+        <div id='title4'>
+        Comments to Question
+        </div>
         <table style="width:100%">
 
             <!-- HEADERSY DO TABELI id,submission_time,vote_number,question_id,message,image -->
@@ -39,13 +40,14 @@
         </table>
 
             <form action='{{ url_for('comment', q_id = quest["id"]) }}' method="POST">
-                <textarea id='comment' name='comment' rows="2" style = "width : 100%" placeholder="START WRITING YOUR COMENTS HERE ......."> </textarea>
+                <textarea id='comment' name='comment' rows="2" style = "width : 99.5%" placeholder="START WRITING YOUR COMENTS HERE ......."> </textarea>
                 <p><button type="submit" name="add_comment" value="add_row">COMMENT</button></p>
             </form>
 
 
-
-        <h2>ANSWERS</h2>
+        <div id="title5">
+        ANSWERS
+        </div>
         <table style="width:100%">
                     <!-- HEADERSY DO TABELI id,submission_time,vote_number,question_id,message,image -->
                 <tr>
@@ -55,6 +57,7 @@
                     <th width="3%">Vote_number</th> <!-- vote_number  -->
                     <!-- question_id  -->
                     <th width="60%">ANSWER</th> <!-- message  -->
+                    <th>Delete</th><!-- delete  -->
                     <!-- image  -->
                 </tr>
                     <!-- #petla wpisujaca wartosci -->
@@ -69,11 +72,12 @@
 
 
                 </table>
-
-                <p><label for="message">Post Answer:</label></p>
+                <div id='title6'>
+                Post Answer:
+                </div>
 
                 <form action='{{ url_for("new_answer", q_id = quest["id"]) }}' method="POST">
-                    <textarea id='answer' name='answer' placeholder="START WRITING YOUR ANSWER HERE ......." rows="5" style = "width : 100%" ></textarea>
+                    <textarea id='answer' name='answer' placeholder="START WRITING YOUR ANSWER HERE ......." rows="5" style = "width : 99.5%" ></textarea>
                     <p><button type="submit" name="add_answer" value="add_row">ANSWER</button></p>
                 </form>
                 <h3>{{message}}</h3>

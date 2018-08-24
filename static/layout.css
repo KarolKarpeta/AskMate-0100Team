@@ -32,6 +32,12 @@ h1{
   text-align:center;
 
 }
+textarea 
+{
+  border: 1px solid black;
+  margin-left: auto;
+  margin-right: auto;
+}
 /*ask_question file css */
 #container
 {
@@ -169,6 +175,44 @@ td {
 }
 
 /*end q_list file css */
+#title2
+{
+  margin-top:20px;
+  font-size:44px;
+
+
+}
+
+#title3
+{
+  margin-top:5px;
+  font-size:22px;
+  border-top:2px solid black;
+  border-bottom: 1px solid black;
+  background: rgb(69, 177, 47);
+  color:white;
+}
+
+#title4
+{
+  margin-top:5px;
+  font-size:18px;
+  border-top:1px solid black;
+  background: rgb(115, 231, 91);
+}
+#title5
+{
+  margin-top:5px;
+  font-size:22px;
+  border-top:1px solid black;
+  background: rgb(115, 231, 91);
+}
+#title6
+{
+  font-size:22px;
+  border-top:1px solid black;
+  background: rgb(115, 231, 91);
+}
 
 
 /*question file css */
