@@ -1,19 +1,53 @@
-table {
-    border: 1px solid black;
-  }
+table { border: 3px solid black;}
 
+body {
+  background-color: rgb(240, 216, 200);
+  font-family: 'Righteous', cursive;
+}
+
+p#message_in_board {
+  border: 1px groove black;
+  padding: 20px;
+}
+
+#container {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#title1
+{
+  font-weight: 900
+
+  
+}
+
+#label1
+{
+
+
+  
+}
+
+.button1
+{
+  float:left;
+
+  
+}
 th {
     border: 1px solid #999;
     padding: 0.1em 1em;
     word-wrap: break-word;
     font-size: 130%
-}
+    }
 td {
     border: 1px solid #999;
     padding: 0.1em 1em;
     word-wrap: break-word;
-    
-}
+
+    }
 
 
 .topnav {

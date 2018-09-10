@@ -2,92 +2,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-
-    <style>
-                table { border: 1px solid black;      }
-                body {background-color: rgb(235, 230, 227);}
-                h1 {font-family: sans-serif}
-
-                th {
-                    border: 1px solid #999;
-                    padding: 0.1em 1em;
-                    word-wrap: break-word;
-                    font-size: 130%
-                }
-                td {
-                    border: 1px solid #999;
-                    padding: 0.1em 1em;
-                    word-wrap: break-word;
-
-                }
-
-        </style>
+    <title>{{ quest["title"] }}</title>
+    <link rel="stylesheet" type="text/css" href='{{url_for("static",filename="layout2.css")}}'>
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
 </head>
+
 <body>
+    <p>
+        <a href="/list"> 
+            <input type="button" value="BACK" name = "add">
+        </a>
+    </p>
+        <h2>{{ quest["title"] }}</h2>
+        <p id="message_in_board">{{ quest["message"] }}</p>
 
-<p><a href="/list"> <input type="button" value="BACK" name = "add"></a></p>
-<h1>Display Question</h1><br>
-
-
-
-        <h3>  {{ quest["title"] }} </h3>
-        <p> {{ quest["message"] }} </p>
-
-    <h4>Comments to Question</h4>
-
-    <table style="width:100%">
-        <!-- HEADERSY DO TABELI id,submission_time,vote_number,question_id,message,image -->
-
-        <!-- id  -->
-        <th width="3%">Submission time</th> <!-- submission_time  -->
-        <th width="80%">COMMENT</th> <!-- vote_number  -->
-         
-
-        <!-- #petla!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! wpisujaca wartosci -->
+    <table id="comment">
+        <th id="submision">Submission time</th>
+        <th id="comment">Question comments</th> 
         {% for row in comments_by_id %}
             <tr>
-                <td>{{ row['submission_time'] }}</td>
-                <td>{{ row['message'] }}</td>
+                <td id="sub_time">{{ row['submission_time'] }}</td>
+                <td id="message">{{ row['message'] }}</td>
             </tr>
         {% endfor %}
     </table>
 
-        <form action='{{ url_for('comment', q_id = quest["id"]) }}' method="POST">
-            <textarea id='comment' name='comment' rows="2" style = "width : 100%" placeholder="START WRITING YOUR COMENTS HERE ......."> </textarea>
-            <p><button type="submit" name="add_comment" value="add_row">COMMENT</button></p>
+        <form action='{{ url_for("comment", q_id = quest["id"]) }}' method="POST">
+            <div class="test"><textarea id='comment' name='comment' rows="3" placeholder="Write your comment here"></textarea></div>
+            <button id="comment_button" type="submit" name="add_comment" value="add_row">COMMENT</button>
         </form>
 
-
-
     <h2>ANSWERS</h2>
-    <table style="width:100%">
-                <!-- HEADERSY DO TABELI id,submission_time,vote_number,question_id,message,image -->
 
-                <!-- id  -->
-                <th width="3%">Submission time</th> <!-- submission_time  -->
-                <th width="3%">Vote_number</th> <!-- vote_number  -->
-                 <!-- question_id  -->
-                <th width="94%">ANSWER</th> <!-- message  -->
-                <!-- image  -->
+    <table id="answer">
+            <th id="submision">Submission time</th>
+            <th id="message">Answer</th>
+            <th id="delete">Delete</th>
 
-                <!-- #petla wpisujaca wartosci -->
                 {% for row in answers_by_id %}
                     <tr>
-                        <td>{{ row['submission_time'] }}</td>
-                        <td>{{ row['vote_number'] }}</td>
-                        <td>{{ row['message'] }}</td>
-                        <td><form action='{{ url_for("delete_answer", a_id = row["id"]) }}' method="POST"><button type="submit" name="delete_answer" value="delete_row">DELETE</button></form></td>
+                        <td id="sub_time">{{ row['submission_time'] }}</td>
+                        <td id="message">{{ row['message'] }}</td>
+                        <td>
+                            <form action='{{ url_for("delete_answer", a_id = row["id"]) }}' method="POST">
+                                <button type="submit" name="delete_answer" value="delete_row">DELETE</button>
+                            </form>
+                        </td>
                     </tr>
                 {% endfor %}
-
-
             </table>
 
-            <p><label for="message">Post Answer:</label></p>
-
+            <p></p><label for="message">Post Answer:</label></p>
             <form action='{{ url_for("new_answer", q_id = quest["id"]) }}' method="POST">
-                <textarea id='answer' name='answer' placeholder="START WRITING YOUR ANSWER HERE ......." rows="5" style = "width : 100%" ></textarea>
+                <div class="test"><textarea id='answer' name='answer' placeholder="Write your answer here" rows="3"></textarea>
                 <p><button type="submit" name="add_answer" value="add_row">ANSWER</button></p>
             </form>
             <h3>{{message}}</h3>
