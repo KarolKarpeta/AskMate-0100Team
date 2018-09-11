@@ -143,8 +143,8 @@ def register():
     elif request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        logic.check_if_user_exists(username, password)
-        return render_template('register.html', username=username)
+        message = logic.check_if_user_exists(username, password)
+        return render_template('register.html', username=username, message=message)
 
 
 if __name__ == '__main__':
