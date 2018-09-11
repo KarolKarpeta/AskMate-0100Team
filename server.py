@@ -136,6 +136,17 @@ def delete_answer(a_id):
         return render_template("500.html", error=e)
 
 
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'GET':
+        return render_template(register.html)
+    elif request.method == 'POST':
+        user_name = request.form['user_name']
+        password = request.form['password']
+        logic.check_if_user_exists(user_name, password)
+        return render_template(register.html, user_name=user_name)
+
+
 if __name__ == '__main__':
     app.run(
         port=5000,
