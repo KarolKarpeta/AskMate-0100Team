@@ -71,7 +71,7 @@ def delete_answer_logic(a_id): # delete answer with exact answer _id
 def add_new_comment_logic(q_id, message):
     try:
         return data_manager.add_new_comment_db(q_id, message)
-    except FileNotFoundError as e:
+    except FileNotFoundError as e:   # BAD EXCEPTION
         # logging.debug(e)
         return []
 

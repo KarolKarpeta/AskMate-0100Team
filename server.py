@@ -4,7 +4,7 @@ import persistence, util, logic
 app = Flask(__name__)
 
 
-@app.route('/list', methods=['GET', 'POST'])
+@app.route('/list', methods=['GET', 'POST'])  # remove methods
 def get_list():
     if request.method == 'GET':
 
@@ -21,13 +21,15 @@ def get_list():
 def add_question():
     msg = ""
     form_values = {}
+
     if request.method == 'POST':
-        msg = logic.check_length_message_question_db(request.form)
         form_values = request.form
+        msg = logic.check_length_message_question_db(form_values)
+
         if msg == "Correct":
             return redirect("/list")
-    return render_template('ask_question.html', message=msg, form=form_values)
 
+    return render_template('ask_question.html', message=msg, form=form_values)
 
 
 @app.route('/question/<int:q_id>', methods=['GET', 'POST'])
@@ -49,14 +51,14 @@ def question(q_id):
                            a_headers=answers_by_question_id['columns'],  message="", comments_by_id = comments_by_question_id['comments_by_question_id'] )
 
 
-
 @app.route('/new_answer/<int:q_id>', methods=['GET', 'POST']) #
 def new_answer(q_id):
     comments_by_question_id = logic.get_comments_by_id_logic(q_id)
 
     if request.method == 'POST':
         answer_message = request.form["answer"]
-        one_question = logic.get_question_by_id_logic(q_id)
+
+        one_question = logic.get_question_by_id_logic(q_id)  # ONE SQL QUERY
         answers_by_question_id = logic.get_answers_by_id_logic(q_id)
 
         communicate =  logic.check_answer_length_logic(answer_message) # check_answer_message_length(answer_message, q_id)
@@ -96,14 +98,12 @@ def search_question():
 @app.route('/new-comment/<int:q_id>', methods=['POST'])
 def comment(q_id):
 
-    one_question = logic.get_question_by_id_logic(q_id)
+    # one_question = logic.get_question_by_id_logic(q_id)
 
 
     comment_message = request.form["comment"]
     logic.add_new_comment_logic(q_id, comment_message)
     return redirect("/question/" + str(q_id))
-
-# id,submission_time,vote_number,question_id,message,image
 
 
 @app.route('/question/<int:q_id>/delete', methods=['GET', 'POST'])

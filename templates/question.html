@@ -4,83 +4,93 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <link rel="stylesheet" type="text/css" href='{{url_for("static",filename="layout.css")}}'>
+    <link rel="stylesheet" type="text/css" href='{{ url_for("static",filename="layout.css") }}'>
     <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
 </head>
 <body>
-    <div class='main_label'>
-    <p><a href="/list"> <input type="button" value="BACK" name = "add"></a></p>
+<div class='main_label'>
+    <p><a href="/list"> <input type="button" value="BACK" name="add"></a></p>
     <div id='title2'>
-    Display Question<br>
+        Display Question<br>
     </div>
 
-            <div id ='title3'>
-            {{ quest["title"] }}
-            </div>
-            <p> {{ quest["message"] }} </p>
-        <div id='title4'>
+    <div id='title3'>
+        {{ quest["title"] }}
+    </div>
+    {{ quest["message"] }}
+    <div id='title4'>
         Comments to Question
-        </div>
-        <table style="width:100%">
+    </div>
+    <table style="width:100%">
 
-            <!-- HEADERSY DO TABELI id,submission_time,vote_number,question_id,message,image -->
-            <tr>
+        <!-- HEADERSY DO TABELI id,submission_time,vote_number,question_id,message,image -->
+        <tr>
             <!-- id  -->
             <th width="7%">Submission time</th> <!-- submission_time  -->
             <th width="60%">COMMENT</th> <!-- vote_number  -->
+        </tr>
+
+        <!-- #petla!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! wpisujaca wartosci -->
+        {% for row in comments_by_id %}
+            <tr>
+                <td>{{ row['submission_time'] }}</td>
+                <td>{{ row['message'] }}</td>
             </tr>
+        {% endfor %}
+    </table>
 
-            <!-- #petla!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! wpisujaca wartosci -->
-            {% for row in comments_by_id %}
-                <tr>
-                    <td>{{ row['submission_time'] }}</td>
-                    <td>{{ row['message'] }}</td>
-                </tr>
-            {% endfor %}
-        </table>
-
-            <form action='{{ url_for('comment', q_id = quest["id"]) }}' method="POST">
-                <textarea id='comment' name='comment' rows="2" style = "width : 99.5%" placeholder="START WRITING YOUR COMENTS HERE ......."> </textarea>
-                <p><button type="submit" name="add_comment" value="add_row">COMMENT</button></p>
-            </form>
+    <form action='{{ url_for('comment', q_id = quest["id"]) }}' method="POST">
+        <textarea id='comment' name='comment' rows="2" style="width : 99.5%"
+                  placeholder="START WRITING YOUR COMENTS HERE ......."> </textarea>
+        <p>
+            <button type="submit" name="add_comment" value="add_row">COMMENT</button>
+        </p>
+    </form>
 
 
-        <div id="title5">
+    <div id="title5">
         ANSWERS
-        </div>
-        <table style="width:100%">
-                    <!-- HEADERSY DO TABELI id,submission_time,vote_number,question_id,message,image -->
-                <tr>
-                    <!-- id  -->
+    </div>
+    <table style="width:100%">
+        <!-- HEADERSY DO TABELI id,submission_time,vote_number,question_id,message,image -->
+        <tr>
+            <!-- id  -->
 
-                    <th width="8%">Submission time</th> <!-- submission_time  -->
-                    <th width="3%">Vote_number</th> <!-- vote_number  -->
-                    <!-- question_id  -->
-                    <th width="60%">ANSWER</th> <!-- message  -->
-                    <th>Delete</th><!-- delete  -->
-                    <!-- image  -->
-                </tr>
-                    <!-- #petla wpisujaca wartosci -->
-                    {% for row in answers_by_id %}
-                        <tr>
-                            <td>{{ row['submission_time'] }}</td>
-                            <td>{{ row['vote_number'] }}</td>
-                            <td>{{ row['message'] }}</td>
-                            <td><form action='{{ url_for("delete_answer", a_id = row["id"]) }}' method="POST"><button type="submit" name="delete_answer" value="delete_row">DELETE</button></form></td>
-                        </tr>
-                    {% endfor %}
+            <th width="8%">Submission time</th> <!-- submission_time  -->
+            <th width="3%">Vote_number</th> <!-- vote_number  -->
+            <!-- question_id  -->
+            <th width="60%">ANSWER</th> <!-- message  -->
+            <th>Delete</th><!-- delete  -->
+            <!-- image  -->
+        </tr>
+        <!-- #petla wpisujaca wartosci -->
+        {% for row in answers_by_id %}
+            <tr>
+                <td>{{ row['submission_time'] }}</td>
+                <td>{{ row['vote_number'] }}</td>
+                <td>{{ row['message'] }}</td>
+                <td>
+                    <form action='{{ url_for("delete_answer", a_id = row["id"]) }}' method="POST">
+                        <button type="submit" name="delete_answer" value="delete_row">DELETE</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
 
 
-                </table>
-                <div id='title6'>
-                Post Answer:
-                </div>
+    </table>
+    <div id='title6'>
+        Post Answer:
+    </div>
 
-                <form action='{{ url_for("new_answer", q_id = quest["id"]) }}' method="POST">
-                    <textarea id='answer' name='answer' placeholder="START WRITING YOUR ANSWER HERE ......." rows="5" style = "width : 99.5%" ></textarea>
-                    <p><button type="submit" name="add_answer" value="add_row">ANSWER</button></p>
-                </form>
-                <h3>{{message}}</h3>
-            </div>
+    <form action='{{ url_for("new_answer", q_id = quest["id"]) }}' method="POST">
+        <textarea id='answer' name='answer' placeholder="START WRITING YOUR ANSWER HERE ......." rows="5"
+                  style="width : 99.5%"></textarea>
+        <p>
+            <button type="submit" name="add_answer" value="add_row">ANSWER</button>
+        </p>
+    </form>
+    <h3>{{ message }}</h3>
+</div>
 </body>
 </html>
