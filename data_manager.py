@@ -12,7 +12,7 @@ def get_all_questions(cursor):
     result = {}
     result['all_questions'] = all_questions
     result['columns'] = columns
-
+    
     return result  # return questions with headers
 
 @database_common.connection_handler 
