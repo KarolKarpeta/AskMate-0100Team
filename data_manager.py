@@ -145,3 +145,25 @@ def get_question_views_db(cursor, q_id):
 def set_question_views_db(cursor, q_id, views_number):
     cursor.execute("""UPDATE question SET view_number  = {} WHERE id = {};""".format(views_number, q_id))
 
+# -------------------------- USERS SECTION --------------------
+@database_common.connection_handler
+def chceck_if_user_exists(user_name):
+    cursor.execute("""SELECT user_name FROM users
+                       WHERE user_name = {};""".format(user_name))
+    user_score = cursor.fetchone()
+    if user_score == user_name:
+        return True
+    else:
+        return False
+
+
+
+@database_common.connection_handler
+def save_user(user_name,password):
+    time = util.generate_time_in_UNIX()
+    registration_date = util.convert_unix_to_time_str(time)
+    cursor.execute("""
+                        INSERT INTO users
+                        (user_id, user_name, password, registration_date)
+                        VALUES({},'{}', '{}', '{}');""".format(user_id, user_name, password,registration_date))
+    return cursor.rowcount
