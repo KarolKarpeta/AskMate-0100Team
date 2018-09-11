@@ -104,10 +104,11 @@ def add_new_comment_db(cursor, q_id, message):
 @database_common.connection_handler # add new answer and question ID
 def search_question_db(cursor, message):
     cursor.execute ("""SELECT DISTINCT(q.id), q.submission_time, q.view_number, q.vote_number, q.title, q.message, q.image 
-                        FROM question as q join answer as a on q.id = a.question_id
+                        FROM question as q 
+                        join answer as a on q.id = a.question_id
                         WHERE LOWER(q.title) LIKE '%{0}%' 
-                        or LOWER(q.message) like '%{0}%' 
-                        or LOWER(a.message) like '%{0}%'; """.format(message))
+                            or LOWER(q.message) like '%{0}%' 
+                            or LOWER(a.message) like '%{0}%'; """.format(message))
     founded_questions = cursor.fetchall()
 
     columns = [column[0] for column in cursor.description]  # get headers

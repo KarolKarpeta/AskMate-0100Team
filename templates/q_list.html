@@ -1,52 +1,59 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Ask Mate</title>
-        <link rel="stylesheet" type="text/css" href='{{url_for("static",filename="layout.css")}}'>
-        <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
 
-    </head>
-        <body>
-            <div class='main_label'>
-                <div class="topnav">
-                        <div class="search-container">
-                            <form action="{{ url_for('search_question') }}" method="POST">
-                              <input type="text" placeholder="Search.." name="search_message">
-                              <button type="submit">SEARCH</button>
-                            </form>
-                        </div>
-                   </div>
-            
-            <h1>Ask Mate - Questions</h1>
-            <p><a href="/register"> <input type="button" value="REGISTER" name = "register"></a></p>
-            <p><a href="/new-question"> <input type="button" value="ADD NEW QUESTION" name = "add"></a></p>
+<head>
+    <meta charset="utf-8">
+    <title>Ask Mate</title>
+    <link rel="stylesheet" type="text/css" href='{{ url_for("static",filename="layout.css") }}'>
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+
+</head>
+<body>
+<div class='main_label'>
+    <div class="topnav">
+        <div class="search-container">
+            <form action="{{ url_for('search_question') }}" method="POST">
+                <input type="text" placeholder="Search.." name="search_message">
+                <button type="submit">SEARCH</button>
+            </form>
+        </div>
+    </div>
+
+    <h1>Ask Mate - Questions</h1>
+    <p><a href="/register"> <input type="button" value="REGISTER" name = "register"></a></p>
+    <p><a href="/new-question"> <input type="button" value="ADD NEW QUESTION" name="add"></a></p>
 
 
-            <table id='tab_questions'>
-                <!-- HEADERSY DO TABELI -->
-                 <!-- ID  -->
-                <tr>
-                <th>{{ headers.0 }}</th> <!-- submission_time  -->
-                <th>{{ headers.1 }}</th> <!-- Title  -->
-                <th>{{ headers.4 }}</th>
-                <th>{{ headers.2 }}</th><!-- Views  -->
-                <th>Delete</th><!-- delete  -->
+    <table id='tab_questions'>
+        <!-- HEADERSY DO TABELI -->
+        <!-- ID  -->
+        <tr>
+            <th>{{ headers.0 }}</th> <!-- submission_time  -->
+            <th>{{ headers.1 }}</th> <!-- Title  -->
+            <th>{{ headers.4 }}</th>
+            <th>{{ headers.2 }}</th><!-- Views  -->
+            <th>Delete</th><!-- delete  -->
+
+        </tr>
+        <!-- #petla wpisujaca wartosci -->
+        {% for row in list_of_dict_on_main %}
+            <tr>
+                <td style="text-align : center">{{ row['id'] }}</td>
+                <td style="text-align : center">{{ row['submission_time'] }}</td>
+                <td>
+                    <a href="{{ url_for('question', q_id = row["id"] ) }}">{{ row['title'] }} </a>
+                </td>
+                <td style="text-align : center">{{ row['view_number'] }}</td>
+                <td>
+                    <form action='{{ url_for("delete_question", q_id = row["id"]) }}' method="POST">
+                        <button type="submit" name="delete_question" value="delete_row">DELETE QUESTION</button>
+                    </form>
+                </td>
             </tr>
-                <!-- #petla wpisujaca wartosci -->
-                {% for row in list_of_dict_on_main %}
-                    <tr>
-                        <td style="text-align : center">{{row['id']}}</td>
-                        <td style="text-align : center">{{row['submission_time']}}</td>
-                        <td> <a href="{{ url_for('question', q_id = row["id"] )}}">{{ row['title'] }} </a> </td>
-                        <td style="text-align : center">{{row['view_number']}}</td>
-                        <td><form action='{{ url_for("delete_question", q_id = row["id"]) }}' method="POST">
-                            <button type="submit" name="delete_question" value="delete_row">DELETE QUESTION</button></form></td>
-                    </tr>
-                {% endfor %}
+        {% endfor %}
 
 
-            </table>
-            </div>
-        </body>
+    </table>
+</div>
+</body>
 </html>

@@ -71,7 +71,7 @@ def delete_answer_logic(a_id): # delete answer with exact answer _id
 def add_new_comment_logic(q_id, message):
     try:
         return data_manager.add_new_comment_db(q_id, message)
-    except FileNotFoundError as e:
+    except FileNotFoundError as e:   # BAD EXCEPTION
         # logging.debug(e)
         return []
 
@@ -126,3 +126,14 @@ def set_question_view_logic(q_id, views_number):
     except FileNotFoundError as e:
         # logging.debug(e)
         return []
+
+
+# ------------------- ASK MATE 3 -------------------------------------
+
+def check_if_user_exists(username, password):
+    message = "USER NAME ALREADY EXIST, PLEASE CHANGE USER NAME"
+    if not data_manager.check_if_user_exists(username, password):
+        data_manager.save_user(username, password)
+        return True
+    else:
+        return message
