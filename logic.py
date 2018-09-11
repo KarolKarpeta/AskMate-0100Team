@@ -131,9 +131,11 @@ def set_question_view_logic(q_id, views_number):
 # ------------------- ASK MATE 3 -------------------------------------
 
 def check_if_user_exists(username, password):
-    message = "USER NAME ALREADY EXIST, PLEASE CHANGE USER NAME"
+    message_exist = "USER NAME ALREADY EXIST, PLEASE CHANGE USER NAME"
+    message_not_exist = "USER SUCCESFUL ADDED"
+
     if not data_manager.check_if_user_exists(username):
         data_manager.save_user(username, password)
-        return True
+        return message_not_exist
     else:
-        return message
+        return message_exist

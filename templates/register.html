@@ -10,11 +10,12 @@
     <form action='{{ url_for("register")}}' method="POST">
 
         <p>Username</p>
-        <textarea id='username' name='username' rows="1"> </textarea>
+
+        <input type="text" id='username' name='username' >
 
         <p>Password</p>
-        <textarea id='password' name='password' rows="1"> </textarea>
-
+        <input type="text" id='password' name='password' >
+        
         <p><button type="submit" name="register" value="register">REGISTER</button></p>
     </form>
 
