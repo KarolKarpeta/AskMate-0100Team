@@ -150,7 +150,7 @@ def set_question_views_db(cursor, q_id, views_number):
 @database_common.connection_handler
 def check_if_user_exists(cursor, user_name):
     cursor.execute("""SELECT user_name FROM users
-                       WHERE user_name = {};""".format(user_name))
+                       WHERE user_name = '{}';""".format(user_name))
     user_score = cursor.fetchone()
     if user_score == user_name:
         return True
@@ -161,8 +161,7 @@ def check_if_user_exists(cursor, user_name):
 
 @database_common.connection_handler
 def save_user(cursor, user_name,password):
-    cursor.execute("""
-                        INSERT INTO users
-                        (user_name, password,)
+    cursor.execute("""  INSERT INTO users
+                        (user_name, password)
                         VALUES('{}', '{}');""".format(user_name, password))
     return cursor.rowcount
