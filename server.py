@@ -139,12 +139,12 @@ def delete_answer(a_id):
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'GET':
-        return render_template(register.html)
+        return render_template('register.html')
     elif request.method == 'POST':
-        user_name = request.form['user_name']
+        username = request.form['username']
         password = request.form['password']
-        logic.check_if_user_exists(user_name, password)
-        return render_template(register.html, user_name=user_name)
+        logic.check_if_user_exists(username, password)
+        return render_template('register.html', username=username)
 
 
 if __name__ == '__main__':

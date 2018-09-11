@@ -65,9 +65,6 @@ def get_comments_by_question_id_dbm(cursor, q_id):
     return result
 
 
-
-
-
 @database_common.connection_handler # moja probna funkcja
 def add_new_question(cursor, title, message):
     time = util.generate_time_in_UNIX()
