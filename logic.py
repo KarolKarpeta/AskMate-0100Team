@@ -126,3 +126,14 @@ def set_question_view_logic(q_id, views_number):
     except FileNotFoundError as e:
         # logging.debug(e)
         return []
+
+
+# ------------------- ASK MATE 3 -------------------------------------
+
+def check_if_user_exists(username, password):
+    message = "USER NAME ALREADY EXIST, PLEASE CHANGE USER NAME"
+    if not data_manager.check_if_user_exists(username, password):
+        data_manager.save_user(username, password)
+        return True
+    else:
+        return message
