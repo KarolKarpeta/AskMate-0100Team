@@ -25,17 +25,16 @@
         </tr>
 
         <!-- #petla wpisujaca wartosci -->
-        {% for row in list_of_dict_on_main %}
+        {% for row in users %}
             <tr>
-                <td style="text-align : center">{{ row['id'] }}</td>
-                <td style="text-align : center">{{ row['submission_time'] }}</td>
                 <td>
-                    <a href="{{ url_for('question', q_id = row["id"] ) }}">{{ row['title'] }} </a>
+                    <a href="{{ url_for('question', q_id = row["id"] ) }}">{{ row['user_name'] }} </a>
                 </td>
-                <td style="text-align : center">{{ row['view_number'] }}</td>
+                <td style="text-align : center">{{ row['registration_date'] }}</td>
+
                 <td>
-                    <form action='{{ url_for("delete_question", q_id = row["id"]) }}' method="POST">
-                        <button type="submit" name="delete_question" value="delete_row">DELETE QUESTION</button>
+                    <form action='{{ url_for("delete_user", q_id = row["id"]) }}' method="POST">
+                        <button type="submit" name="delete_user" >DELETE USER</button>
                     </form>
                 </td>
             </tr>
