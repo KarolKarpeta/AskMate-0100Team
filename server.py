@@ -150,10 +150,19 @@ def register():
 def users_table():
     try:
         users = logic.check_if_database_works_and_has_users()
+<<<<<<< HEAD
         return render_template('users.html',users=users)
+=======
+        return render_template('users.html', users = users)
+>>>>>>> 1f5e973262ff10978fa5e990bdf13e69993b311d
 
     except Exception as e:
         return render_template("500.html", error=e)
+
+
+
+
+
 
 if __name__ == '__main__':
     app.run(
