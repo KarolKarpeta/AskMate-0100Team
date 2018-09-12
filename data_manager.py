@@ -149,10 +149,7 @@ def set_question_views_db(cursor, q_id, views_number):
 # -------------------------- USERS SECTION --------------------
 @database_common.connection_handler
 def check_if_user_exists(cursor, user_name):
-    '''
-    cursor.execute("""SELECT user_name FROM users
-                       WHERE user_name = '{}';""".format(user_name))
-                       '''
+    
     cursor.execute(""" SELECT COUNT(user_name) 
                        FROM USERS 
                        WHERE user_name = '{}';""".format(user_name))
@@ -172,3 +169,14 @@ def save_user(cursor, user_name,password):
                         (user_name, password)
                         VALUES('{}', '{}');""".format(user_name, password))
     return cursor.rowcount
+
+
+@database_common.connection_handler
+def get_users(cursor):
+    cursor.execute("""  SELECT user_name, registration_date
+                        FROM users
+                        """)
+    users = cursor.fetchall()
+    print(users)
+    return users
+    
