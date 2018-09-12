@@ -21,22 +21,15 @@
         <tr>
             <th>USER NAME</th>
             <th>REGISTRATION DATE</th>
-            <th>Delete</th>
         </tr>
 
         <!-- #petla wpisujaca wartosci -->
         {% for row in users %}
             <tr>
-                <td>
-                    <a href="{{ url_for('question', q_id = row["user_id"] ) }}">{{ row['user_name'] }} </a>
-                </td>
+                <td style="text-align : center">{{ row['user_name'] }}</td>
                 <td style="text-align : center">{{ row['registration_date'] }}</td>
 
-                <td>
-                    <form action='{{ url_for("delete_user", q_id = row["user_id"]) }}' method="POST">
-                        <button type="submit" name="delete_user" >DELETE USER</button>
-                    </form>
-                </td>
+
             </tr>
         {% endfor %}
 
