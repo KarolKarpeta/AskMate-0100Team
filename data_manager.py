@@ -173,7 +173,7 @@ def save_user(cursor, user_name,password):
 
 @database_common.connection_handler
 def get_users(cursor):
-    cursor.execute("""  SELECT user_name, registration_date
+    cursor.execute("""  SELECT user_name, registration_date, user_id
                         FROM users
                         """)
     users = cursor.fetchall()
