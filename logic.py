@@ -141,10 +141,11 @@ def check_if_user_exists(username, password):
         return message_exist
 
 def check_if_database_works_and_has_users():
-    database_not_exists = "THERE IS NO CONNECTION WITH DATABASE"
-    database_has_no_users = "USERS LIST IS STILL EMPTY"
-
     users = data_manager.get_users()
-    return users
+    print("Dlugosc:", len(users))
+    if len(users) == 0:
+        return [{'user_name': "THERE IS NO USERS IN DATABASE"}]
+    else:
+        return users
 
 
