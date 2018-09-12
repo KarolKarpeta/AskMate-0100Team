@@ -7,7 +7,7 @@
 <body>
     <p><a href="/list"> <input type="button" value="BACK" name = "back"></a></p>
 
-    <form action='{{ url_for("register")}}' method="POST">
+    <form name="form1" action='{{ url_for("register")}}' method="POST" onsubmit="return required()">
 
         <p>Username</p>
 
@@ -15,11 +15,11 @@
 
         <p>Password</p>
         <input type="text" id='password' name='password' >
-        
+
         <p><button type="submit" name="register" value="register">REGISTER</button></p>
     </form>
 
    <h3>{{message}}</h3> {# Wiadomosc o istniejacym uzytkowniku#}
-
+<script src="/static/non-empty.js"></script>
 </body>
 </html>
