@@ -149,10 +149,17 @@ def set_question_views_db(cursor, q_id, views_number):
 # -------------------------- USERS SECTION --------------------
 @database_common.connection_handler
 def check_if_user_exists(cursor, user_name):
+    '''
     cursor.execute("""SELECT user_name FROM users
-                       WHERE user_name = {};""".format(user_name))
+                       WHERE user_name = '{}';""".format(user_name))
+                       '''
+    cursor.execute(""" SELECT COUNT(user_name) 
+                       FROM USERS 
+                       WHERE user_name = '{}';""".format(user_name))
+
     user_score = cursor.fetchone()
-    if user_score == user_name:
+    print("zwraca fetch one", user_score)
+    if user_score['count'] > 0:
         return True
     else:
         return False
@@ -161,8 +168,7 @@ def check_if_user_exists(cursor, user_name):
 
 @database_common.connection_handler
 def save_user(cursor, user_name,password):
-    cursor.execute("""
-                        INSERT INTO users
-                        (user_name, password,)
+    cursor.execute("""  INSERT INTO users
+                        (user_name, password)
                         VALUES('{}', '{}');""".format(user_name, password))
     return cursor.rowcount

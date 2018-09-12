@@ -11,6 +11,7 @@
 <body>
 <div class='main_label'>
     <div class="topnav">
+        <p><a href="/register"> <input type="button" value="REGISTER" name = "register"></a></p>
         <div class="search-container">
             <form action="{{ url_for('search_question') }}" method="POST">
                 <input type="text" placeholder="Search.." name="search_message">
@@ -20,7 +21,7 @@
     </div>
 
     <h1>Ask Mate - Questions</h1>
-    <p><a href="/register"> <input type="button" value="REGISTER" name = "register"></a></p>
+
     <p><a href="/new-question"> <input type="button" value="ADD NEW QUESTION" name="add"></a></p>
 
 
