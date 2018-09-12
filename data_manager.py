@@ -178,10 +178,5 @@ def get_users(cursor):
                         """)
     users = cursor.fetchall()
     print(users)
-    check = cursor.fetchone()
-    if check is not None:
-        return message = True
-    else:
-        return message = False
-    return users, message
+    return users
     
