@@ -146,6 +146,14 @@ def register():
         message = logic.check_if_user_exists(username, password)
         return render_template('register.html', username=username, message=message)
 
+@app.route('/users')
+def users_table():
+    try:
+    users = logic.check_if_database_works_and_has_users()
+    return render_template('users.html',users = users)
+
+    except Exception as e:
+        return render_template("500.html", error=e)
 
 if __name__ == '__main__':
     app.run(
