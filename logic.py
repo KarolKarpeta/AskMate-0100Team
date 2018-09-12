@@ -145,10 +145,6 @@ def check_if_database_works_and_has_users():
     database_has_no_users = "USERS LIST IS STILL EMPTY"
 
     users = data_manager.get_users()
-    no_users = {}
-    if users (len < 1):
-        return no_users, database_has_no_users
-    else:
-        return users
+    return users
 
 
