@@ -5,12 +5,12 @@ function required()
 
     if (empty1 === "" || empty2 === "")
         {
-        alert("Please input a Value");
+        alert("PLEASE INPUT A VALUE");
         return false;
         }
     else
         {
-        alert('Code has accepted : you can try another');
+        alert('USER REGISTERED CORRECTLY');
         return true;
         }
 }
