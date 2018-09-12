@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Ask Mate</title>
+    <link rel="stylesheet" type="text/css" href='{{ url_for("static",filename="layout.css") }}'>
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+
+</head>
+<body>
+<div class='main_label'>
+    <div class="topnav">
+        <p><a href="/register"> <input type="button" value="REGISTER" name = "register"></a></p>
+
+    </div>
+<!-- delete  -->
+    <h1>USERS LIST</h1>
+
+    <table id='user_list'>
+        <tr>
+            <th>USER NAME</th>
+            <th>REGISTRATION DATE</th>
+            <th>Delete</th>
+        </tr>
+
+        <!-- #petla wpisujaca wartosci -->
+        {% for row in list_of_dict_on_main %}
+            <tr>
+                <td style="text-align : center">{{ row['id'] }}</td>
+                <td style="text-align : center">{{ row['submission_time'] }}</td>
+                <td>
+                    <a href="{{ url_for('question', q_id = row["id"] ) }}">{{ row['title'] }} </a>
+                </td>
+                <td style="text-align : center">{{ row['view_number'] }}</td>
+                <td>
+                    <form action='{{ url_for("delete_question", q_id = row["id"]) }}' method="POST">
+                        <button type="submit" name="delete_question" value="delete_row">DELETE QUESTION</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+
+
+    </table>
+</div>
+</body>
+</html>
