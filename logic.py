@@ -144,7 +144,15 @@ def check_if_database_works_and_has_users():
     database_not_exists = "THERE IS NO CONNECTION WITH DATABASE"
     database_has_no_users = "USERS LIST IS STILL EMPTY"
 
+    # no_users = {}
+    # users = data_manager.get_users()
+    # if len(users > 0):
+    #     print("Sa uzytkownicy")
+    #     return users
+    # else:
+    #     print("nie ma uzytkownikow")
+    #     return [{"user_name" : "database_has_no_users"}]
+
     users = data_manager.get_users()
     return users
-
 
