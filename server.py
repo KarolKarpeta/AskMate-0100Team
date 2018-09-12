@@ -138,19 +138,25 @@ def delete_answer(a_id):
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    mess = ""
+
     if request.method == 'GET':
         return render_template('register.html')
     elif request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        message = logic.check_if_user_exists(username, password)
-        return render_template('register.html', username=username, message=message)
+        mess = logic.check_if_user_exists(username, password)
+
+    if mess == "USER SUCCESSFULLY ADDED":
+        return redirect("/list")
+    else:
+        return render_template('register.html', username=username, message=mess)
 
 @app.route('/users')
 def users_table():
     try:
         users = logic.check_if_database_works_and_has_users()
-        return render_template('users.html',users=users)
+        return render_template('users.html', users=users)
 
     except Exception as e:
         return render_template("500.html", error=e)
