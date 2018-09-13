@@ -6,6 +6,26 @@
     <title>hfghgfhf</title>
     <link rel="stylesheet" type="text/css" href='{{ url_for("static",filename="layout.css") }}'>
     <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+
+    <script>
+        window.onload = function() {
+
+        var a = false;
+        
+            document.getElementById('title4').onclick = function() {
+                if (a == true){
+                    document.getElementById('p1').style.display='none';
+                    a=false;
+                }else{
+                    document.getElementById('p1').style.display='table';
+                    a=true;
+                }
+                
+            }
+        }
+        
+    
+    </script>
 </head>
 <body>
 <div class='main_label'>
@@ -17,24 +37,25 @@
     <div id='title3'>
         Your Activities
     </div>
-    <div id='title4'>
+    <button id='title4'>
         QUESTIONS
-    </div>
-    <table style="width:100%">
+    </button>
+    
+    <table style="display:none" id=p1>
 
         {% for row in list_of_questions %}
             <tr>
                 <td> 
-                    <a href="{{ url_for('question', q_id = row["id"] ) }}">{{ row['title'] }} </a> 
+                    <a href="{{ url_for('question', q_id = row["id"] ) }}">{{ row['title'] }} </a>
                 </td>
             </tr>
         {% endfor %}
     </table>
 
-    <div id="title4">
+    <button id="btn2">
         ANSWERS
-    </div>
-    <table style="width:100%">
+    </button>
+    <table style="display:none" id=p2>
         {% for row in list_of_answers %}
             <tr>
                 <td>
@@ -44,10 +65,10 @@
         {% endfor %}
     </table>
 
-    <div id="title4">
+    <button id="btn3">
         COMMENTS
-    </div>
-    <table style="width:100%">
+    </button>
+    <table style="display:none" id=p1>
         {% for row in list_of_comments %}
             <tr>
                 <td>
