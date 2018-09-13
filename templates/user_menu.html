@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
 
-    <title>{{ users["user_name"] }}</title>
+    <title>hfghgfhf</title>
     <link rel="stylesheet" type="text/css" href='{{ url_for("static",filename="layout.css") }}'>
     <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
 </head>
@@ -11,7 +11,7 @@
 <div class='main_label'>
     <p><a href="/list"> <input type="button" value="BACK" name="add"></a></p>
     <div id='title2'>
-        {{ users["user_name"] }}<br>
+        hfghgfhf<br>
     </div>
 
     <div id='title3'>
@@ -23,12 +23,11 @@
     <table style="width:100%">
 
             <th width="7%">The Content Of The Question:</th> 
-            <th width="60%">Link</th> 
+
         </tr>
         {% for row in list_of_questions %}
             <tr>
-                <td>{{ row['question'] }}</td>
-                <td><a href="{{ url_for('question', q_id = row["id"] ) }}">Go In Deeper</a></td>
+                <td><a href="{{ url_for('question', q_id = row["q_id"] ) }}"> {{ row["title"] }}</a></td>
             </tr>
         {% endfor %}
     </table>
@@ -40,13 +39,13 @@
         <tr>
 
             <th width="8%">Answers</th>
-            <th width="3%">Link</th>
+
         </tr>
         <!-- #petla wpisujaca wartosci -->
         {% for row in list_of_answers %}
             <tr>
-                <td>{{ row['answer'] }}</td>
-                <td><a href="{{ url_for('question', q_id = row["id"] ) }}">Go In Deeper</a></td>
+
+                <td><a href="{{ url_for('question', q_id = row["q_id"] ) }}"> {{ "title" }}</a></td>
                 </td>
             </tr>
         {% endfor %}
@@ -62,13 +61,13 @@
     <tr>
 
         <th width="8%">Answers</th>
-        <th width="3%">Link</th>
+
     </tr>
     
     {% for row in list_of_comments %}
         <tr>
-            <td>{{ row['comment'] }}</td>
-            <td><a href="{{ url_for('question', q_id = row["id"] ) }}">Go In Deeper</a></td>
+
+            <td><a href="{{ url_for('question', q_id = row["q_id"] ) }}"> {{ "title" }}</a></td>
             </td>
         </tr>
     {% endfor %}

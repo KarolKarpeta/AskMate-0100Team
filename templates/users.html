@@ -28,7 +28,7 @@
         {% for row in users %}
             <tr>
                 <td>
-                    <a href="{{ url_for('user_page', id = row["user_id"] ) }}">{{ row['user_name'] }} </a>
+                    <a href="{{ url_for('user_page', user_id = row["user_id"] ) }}">{{ row['user_name'] }} </a>
                 </td>
                 <td style="text-align : center">{{ row['registration_date'] }}</td>
 
