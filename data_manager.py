@@ -204,5 +204,7 @@ def get_user_name_by_id(cursor, user_id):
     cursor.execute("""SELECT user_name 
                       FROM users
                       WHERE user_id = {user_id};""".format(user_id = user_id))
-    user_name = cursor.fetchall()
-    return user_name
+
+    user_name = cursor.fetchone()
+    return user_name['user_name']
+
