@@ -11,36 +11,28 @@
 <div class='main_label'>
     <p><a href="/list"> <input type="button" value="BACK" name="add"></a></p>
     <div id='title2'>
-        hfghgfhf<br>
+       USER:  {{ list_of_questions[0]["user_name"] }}
     </div>
 
     <div id='title3'>
         Your Activities
     </div>
     <div id='title4'>
-        Question That You Posted :
+        QUESTIONS
     </div>
     <table style="width:100%">
-        <tr>
-            <th width="7%">The Content Of The Question:</th> 
-        </tr>
+
         {% for row in list_of_questions %}
             <tr>
                 <td> {{ row["title"] }} </td>
             </tr>
         {% endfor %}
     </table>
-    <div id="title5">
+
+    <div id="title4">
         ANSWERS
     </div>
     <table style="width:100%">
-
-        <tr>
-
-            <th width="8%">Answers</th>
-
-        </tr>
-
         {% for row in list_of_answers %}
             <tr>
 
@@ -48,28 +40,18 @@
                 </td>
             </tr>
         {% endfor %}
-
-
     </table>
 
-    <div id="title5">
-        Comments
+    <div id="title4">
+        COMMENTS
     </div>
     <table style="width:100%">
-
-    <tr>
-
-        <th width="8%">Answers</th>
-
-    </tr>
-    
-    {% for row in list_of_comments %}
-        <tr>
-
-            <td>{{ row["title"] }} </td>
-            </td>
-        </tr>
-    {% endfor %}
+        {% for row in list_of_comments %}
+            <tr>
+                <td>{{ row["title"] }} </td>
+            </tr>
+        {% endfor %}
+    </table>
 
     <h3>{{ message }}</h3>
 </div>
