@@ -166,7 +166,9 @@ def users_table():
 @app.route('/user_page/<int:user_id>')
 def user_page(user_id):
     try:
+
         list_of_lists = logic.get_users_questions_answers_comments_by_id(user_id)
+        print("list of list", list_of_lists)
 
         print("q", list_of_lists[0])
         print("a", list_of_lists[1])
