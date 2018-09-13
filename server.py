@@ -16,7 +16,6 @@ def get_list():
             return render_template("500.html", error=e)
 
 
-
 @app.route('/new-question', methods=['GET', 'POST'])
 def add_question():
     msg = ""
