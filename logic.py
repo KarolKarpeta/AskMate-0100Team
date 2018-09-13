@@ -152,8 +152,10 @@ def get_users_questions_answers_comments_by_id(user_id):
     user_data = data_manager.get_user_questions_answers_comments(user_id)
 
     list_of_list = util.split_list_of_dictionaries(user_data) # split list into 3 different lists
-    if len(user_data) == 0:
-        return[{'user_name': "USER DATA DO NOT EXIST"}]
+    if len(list_of_list[0]) == 0 and len(list_of_list[1]) == 0 and len(list_of_list[2]) == 0:
+        return[[{'id':1, 'title': "USER DATA DO NOT EXIST"}],
+        [{'id':1, 'title': "USER DATA DO NOT EXIST"}],
+        [{'id':1, 'title': "USER DATA DO NOT EXIST"}]]
     else:
         return list_of_list
 
