@@ -25,7 +25,7 @@
         {% for row in list_of_questions %}
             <tr>
                 <td> 
-                    <a href="{{ url_for('question', q_id = row["id"] ) }}">{{ row['title'] }} </a> 
+                    <a href="{{ url_for('question', q_id = row["id"] ) }}">{{ row['title'] }} </a>
                 </td>
             </tr>
         {% endfor %}

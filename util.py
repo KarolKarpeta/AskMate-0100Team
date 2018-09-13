@@ -98,4 +98,3 @@ def split_list_of_dictionaries(list_of_dictionaries):
 
     return list_of_list
 
-
