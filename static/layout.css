@@ -10,9 +10,15 @@ table td, #tab_questions th {
   padding: 8px;
 }
 
+table tr {
+  transition: background-color 150ms ease-in-out;
+}
+
 table tr:nth-child(even){background-color: #f2f2f2;}
 
-table tr:hover {background-color: #ddd;}
+table tr:hover {
+  background-color: #ddd;
+}
 
 table th {
   padding-top: 12px;
