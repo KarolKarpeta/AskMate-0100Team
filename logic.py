@@ -148,4 +148,11 @@ def check_if_database_works_and_has_users():
     else:
         return users
 
+def check_if_user_activity_data_exists(user_id)
+    user_data = data_manager.<nazwa_funkcji>()
+    if len(user_data) == 0:
+        return[{'user_name': "USER DATA DO NOT EXIST"}]
+    else:
+        return user_data
+
 
