@@ -179,4 +179,23 @@ def get_users(cursor):
     users = cursor.fetchall()
     print(users)
     return users
-    
+
+@database_common.connection_handler
+def get_user_questions_answers_comments(cursor, user_id):
+    cursor.execute("""SELECT users.user_name,  question.title, 'question' as label
+                        FROM users
+                        JOIN question on users.user_id = question.userid
+                        WHERE users.user_id = {user_id}
+                        UNION ALL
+                        SELECT users.user_name,   answer.message , 'answer' as label
+                        FROM users
+                        JOIN answer ON users.user_id = answer.userid
+                        WHERE users.user_id = {user_id}
+                        UNION ALL
+                        SELECT users.user_name,  comment.message, 'comment' as label
+                        FROM users
+                        JOIN comment ON users.user_id = comment.userid
+                        WHERE users.user_id = {user_id};""".format(user_id = user_id))
+    user_records = cursor.fetchall()
+    return user_records
+

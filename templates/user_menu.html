@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>hfghgfhf</title>
+    <link rel="stylesheet" type="text/css" href='{{ url_for("static",filename="layout.css") }}'>
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+</head>
+<body>
+<div class='main_label'>
+    <p><a href="/list"> <input type="button" value="BACK" name="add"></a></p>
+    <div id='title2'>
+        hfghgfhf<br>
+    </div>
+
+    <div id='title3'>
+        Your Activities
+    </div>
+    <div id='title4'>
+        Question That You Posted :
+    </div>
+    <table style="width:100%">
+
+            <th width="7%">The Content Of The Question:</th> 
+
+        </tr>
+        {% for row in list_of_questions %}
+            <tr>
+                <td><a href="{{ url_for('question', q_id = row["q_id"] ) }}"> {{ row["title"] }}</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div id="title5">
+        ANSWERS
+    </div>
+    <table style="width:100%">
+
+        <tr>
+
+            <th width="8%">Answers</th>
+
+        </tr>
+        <!-- #petla wpisujaca wartosci -->
+        {% for row in list_of_answer %}
+            <tr>
+
+                <td><a href="{{ url_for('question', q_id = row["q_id"] ) }}"> {{ "title" }}</a></td>
+                </td>
+            </tr>
+        {% endfor %}
+
+
+    </table>
+
+    <div id="title5">
+        Comments
+    </div>
+    <table style="width:100%">
+
+    <tr>
+
+        <th width="8%">Answers</th>
+
+    </tr>
+    
+    {% for row in list_of_comments %}
+        <tr>
+
+            <td><a href="{{ url_for('question', q_id = row["q_id"] ) }}"> {{ "title" }}</a></td>
+            </td>
+        </tr>
+    {% endfor %}
+
+    <h3>{{ message }}</h3>
+</div>
+</body>
+</html>
