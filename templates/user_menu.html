@@ -11,6 +11,8 @@
         window.onload = function() {
 
         var a = false;
+        var b = false;
+        var c = false;
         
             document.getElementById('title4').onclick = function() {
                 if (a == true){
@@ -19,6 +21,26 @@
                 }else{
                     document.getElementById('p1').style.display='table';
                     a=true;
+                }
+                
+            }
+            document.getElementById('btn2').onclick = function() {
+                if (b == true){
+                    document.getElementById('p2').style.display='none';
+                    b=false;
+                }else{
+                    document.getElementById('p2').style.display='table';
+                    b=true;
+                }
+                
+            }
+            document.getElementById('btn3').onclick = function() {
+                if (c == true){
+                    document.getElementById('p3').style.display='none';
+                    c=false;
+                }else{
+                    document.getElementById('p3').style.display='table';
+                    c=true;
                 }
                 
             }
@@ -68,7 +90,7 @@
     <button id="btn3">
         COMMENTS
     </button>
-    <table style="display:none" id=p1>
+    <table style="display:none" id=p3>
         {% for row in list_of_comments %}
             <tr>
                 <td>
