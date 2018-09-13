@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
-import persistence, util, logic
+import persistence, util, logic, data_manager
+
 
 app = Flask(__name__)
 
@@ -8,6 +9,7 @@ app = Flask(__name__)
 def get_list():
     if request.method == 'GET':
 
+        print(data_manager.get_user_questions_answers_comments(1))
         questions_and_headers = logic.get_all_questions()
 
         try:
@@ -161,6 +163,17 @@ def users_table():
         return render_template("500.html", error=e)
 
 
+@app.route('/user_page/<int:user_id>')
+def user_page(user_id):
+    try:
+        questions = [{"title":"pytanie nr 1", "q_id":2},{"title":"pytanie nr 2", "q_id":4} ]
+        answer = [{"title": "pytanie nr 1", "q_id": 2}, {"title": "pytanie nr 2", "q_id": 4}]
+        comments = [{"title": "pytanie nr 1", "q_id": 2}, {"title": "pytanie nr 2", "q_id": 4}]
+
+        return render_template('user_menu.html', list_of_questions = questions, list_of_answer = answer, list_of_comments = comments, user_id = user_id )
+
+    except Exception as e:
+        return render_template("500.html", error=e)
 
 
 
