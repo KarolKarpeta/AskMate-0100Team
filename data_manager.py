@@ -187,7 +187,7 @@ def get_user_questions_answers_comments(cursor, user_id):
                         JOIN question on users.user_id = question.userid
                         WHERE users.user_id = {user_id}
                         UNION ALL
-                        SELECT users.user_name, answer_question_id  answer.message , 'answer' as label
+                        SELECT users.user_name, answer.question_id,  answer.message , 'answer' as label
                         FROM users
                         JOIN answer ON users.user_id = answer.userid
                         WHERE users.user_id = {user_id}

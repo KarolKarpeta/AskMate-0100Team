@@ -166,11 +166,14 @@ def users_table():
 @app.route('/user_page/<int:user_id>')
 def user_page(user_id):
     try:
-        questions = [{"title":"pytanie nr 1", "q_id":2},{"title":"pytanie nr 2", "q_id":4} ]
-        answer = [{"title": "pytanie nr 1", "q_id": 2}, {"title": "pytanie nr 2", "q_id": 4}]
-        comments = [{"title": "pytanie nr 1", "q_id": 2}, {"title": "pytanie nr 2", "q_id": 4}]
+        list_of_lists = logic.get_users_questions_answers_comments_by_id(user_id)
 
-        return render_template('user_menu.html', list_of_questions = questions, list_of_answer = answer, list_of_comments = comments, user_id = user_id )
+        print("q", list_of_lists[0])
+        print("a", list_of_lists[1])
+        print("c", list_of_lists[2])
+
+
+        return render_template('user_menu.html', list_of_questions = list_of_lists[0], list_of_answers = list_of_lists[1], list_of_comments = list_of_lists[2], user_id = user_id )
 
     except Exception as e:
         return render_template("500.html", error=e)

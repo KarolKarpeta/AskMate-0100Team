@@ -148,11 +148,18 @@ def check_if_database_works_and_has_users():
     else:
         return users
 
+<<<<<<< HEAD
 def check_if_user_activity_data_exists(user_id):
     user_data = data_manager.get_user_questions_answers_comments()
+=======
+def get_users_questions_answers_comments_by_id(user_id):
+    user_data = data_manager.get_user_questions_answers_comments(user_id)
+
+    list_of_list = util.split_list_of_dictionaries(user_data) # split list into 3 different lists
+>>>>>>> 9a1cb97705d887b87ab6f1b615aef58497ee5d58
     if len(user_data) == 0:
         return[{'user_name': "USER DATA DO NOT EXIST"}]
     else:
-        return user_data
+        return list_of_list
 
 
