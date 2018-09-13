@@ -157,15 +157,15 @@ def get_users_questions_answers_comments_by_id(user_id):
 
     if len(list_of_list[0]) == 0 and len(list_of_list[1]) == 0 and len(list_of_list[2]) == 0:
         user_name = data_manager.get_user_name_by_id(user_id)
-        user_name=user_name['user_name']
+
         return[[{'user_name': user_name, 'id':1, 'title': "USER DATA DO NOT EXIST"}],
         [{'id':1, 'title': "USER DATA DO NOT EXIST"}],
         [{'id':1, 'title': "USER DATA DO NOT EXIST"}]]
     elif len(list_of_list[0]) == 0 or len(list_of_list[1]) == 0 or len(list_of_list[2]) == 0:
         if len(list_of_list[0]) == 0:
             user_name = data_manager.get_user_name_by_id(user_id)
-            name = user_name['user_name']
-            list_of_list[0].append({'user_name': name, 'id':1, 'title': "USER DATA DO NOT EXIST"})
+
+            list_of_list[0].append({'user_name': user_name, 'id':1, 'title': "USER DATA DO NOT EXIST"})
         if len(list_of_list[1]) == 0:
             list_of_list[1].append({'id':1, 'title': "USER DATA DO NOT EXIST"})
         if len(list_of_list[2]) == 0:
