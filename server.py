@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-import persistence, util, logic
+import persistence, util, logic, data_manager
 
 app = Flask(__name__)
 
@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route('/list', methods=['GET', 'POST'])  # remove methods
 def get_list():
     if request.method == 'GET':
-
+        data_manager.
         questions_and_headers = logic.get_all_questions()
 
         try:
