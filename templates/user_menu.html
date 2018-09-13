@@ -64,9 +64,14 @@
     </button>
     
     <table style="display:none" id=p1>
+        <tr>
+            <th>SUBMISSION TIME</th>
+            <th>QUESTION</th>
+        </tr>
 
         {% for row in list_of_questions %}
             <tr>
+                <td>{{ row['submission_time'] }} </td>
                 <td> 
                     <a href="{{ url_for('question', q_id = row["id"] ) }}">{{ row['title'] }} </a>
                 </td>
@@ -78,8 +83,14 @@
         ANSWERS
     </button>
     <table style="display:none" id=p2>
+        <tr>
+            <th>SUBMISSION TIME</th>
+            <th>ANSWERS</th>
+        </tr>
+
         {% for row in list_of_answers %}
             <tr>
+                <td>{{ row['submission_time'] }} </td>
                 <td>
                     <a href="{{ url_for('question', q_id = row["id"] ) }}">{{ row['title'] }} </a>
                 </td>
@@ -91,8 +102,13 @@
         COMMENTS
     </button>
     <table style="display:none" id=p3>
+        <tr>
+            <th>SUBMISSION TIME</th>
+            <th>COMMENTS</th>
+        </tr>
         {% for row in list_of_comments %}
             <tr>
+                <td>{{ row['submission_time'] }} </td>
                 <td>
                     <a href="{{ url_for('question', q_id = row["id"] ) }}">{{ row['title'] }} </a>
                 </td>
