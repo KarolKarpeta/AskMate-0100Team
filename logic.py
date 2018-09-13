@@ -155,4 +155,3 @@ def check_if_user_activity_data_exists(user_id)
     else:
         return user_data
 
-
