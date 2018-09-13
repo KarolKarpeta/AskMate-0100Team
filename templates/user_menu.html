@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>{{ users["user_name"] }}</title>
+    <link rel="stylesheet" type="text/css" href='{{ url_for("static",filename="layout.css") }}'>
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+</head>
+<body>
+<div class='main_label'>
+    <p><a href="/list"> <input type="button" value="BACK" name="add"></a></p>
+    <div id='title2'>
+        {{ users["user_name"] }}<br>
+    </div>
+
+    <div id='title3'>
+        Your Activities
+    </div>
+    <div id='title4'>
+        Question That You Posted :
+    </div>
+    <table style="width:100%">
+
+            <th width="7%">The Content Of The Question:</th> 
+            <th width="60%">Link</th> 
+        </tr>
+        {% for row in question_list %}
+            <tr>
+                <td>{{ row['question'] }}</td>
+                <td><a href="{{ url_for('question', q_id = row["id"] ) }}">Go In Deeper</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div id="title5">
+        ANSWERS
+    </div>
+    <table style="width:100%">
+
+        <tr>
+
+            <th width="8%">Answers</th>
+            <th width="3%">Link</th>
+        </tr>
+        <!-- #petla wpisujaca wartosci -->
+        {% for row in answers_list %}
+            <tr>
+                <td>{{ row['answer'] }}</td>
+                <td><a href="{{ url_for('question', q_id = row["id"] ) }}">Go In Deeper</a></td>
+                </td>
+            </tr>
+        {% endfor %}
+
+
+    </table>
+
+    <div id="title5">
+        Comments
+    </div>
+    <table style="width:100%">
+
+    <tr>
+
+        <th width="8%">Answers</th>
+        <th width="3%">Link</th>
+    </tr>
+    
+    {% for row in comments_list %}
+        <tr>
+            <td>{{ row['comment'] }}</td>
+            <td><a href="{{ url_for('question', q_id = row["id"] ) }}">Go In Deeper</a></td>
+            </td>
+        </tr>
+    {% endfor %}
+
+    <h3>{{ message }}</h3>
+</div>
+</body>
+</html>
