@@ -73,3 +73,29 @@ def prepare_list_to_save_to_the_file(title, massage):
     to_add=[id_, str(unix), "0", "0", title, massage,]
     return to_add
 
+def split_list_of_dictionaries(list_of_dictionaries):
+
+    list_of_list = []
+    questions = []
+    answers = []
+    comments = []
+
+    for dic in list_of_dictionaries:
+        for key, value in dic.items():
+            if value == 'answer':
+                answers.append(dic)
+            elif value == 'question':
+                questions.append(dic)
+            elif value == 'comment':
+                comments.append(dic)
+
+    print("lista", list_of_dictionaries)
+
+    list_of_list.append(questions)
+    list_of_list.append(answers)
+    list_of_list.append(comments)
+
+
+    return list_of_list
+
+
