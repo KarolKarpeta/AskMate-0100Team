@@ -21,13 +21,12 @@
         Question That You Posted :
     </div>
     <table style="width:100%">
-
+        <tr>
             <th width="7%">The Content Of The Question:</th> 
-
         </tr>
         {% for row in list_of_questions %}
             <tr>
-                <td><a href="{{ url_for('question', q_id = row["q_id"] ) }}"> {{ row["title"] }}</a></td>
+                <td> {{ row["title"] }} </td>
             </tr>
         {% endfor %}
     </table>
@@ -41,11 +40,11 @@
             <th width="8%">Answers</th>
 
         </tr>
-        <!-- #petla wpisujaca wartosci -->
-        {% for row in list_of_answer %}
+
+        {% for row in list_of_answers %}
             <tr>
 
-                <td><a href="{{ url_for('question', q_id = row["q_id"] ) }}"> {{ "title" }}</a></td>
+                <td> {{ row["title"] }} </td>
                 </td>
             </tr>
         {% endfor %}
@@ -67,7 +66,7 @@
     {% for row in list_of_comments %}
         <tr>
 
-            <td><a href="{{ url_for('question', q_id = row["q_id"] ) }}"> {{ "title" }}</a></td>
+            <td>{{ row["title"] }} </td>
             </td>
         </tr>
     {% endfor %}
