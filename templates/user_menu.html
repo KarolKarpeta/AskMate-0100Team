@@ -25,7 +25,7 @@
             <th width="7%">The Content Of The Question:</th> 
             <th width="60%">Link</th> 
         </tr>
-        {% for row in question_list %}
+        {% for row in list_of_questions %}
             <tr>
                 <td>{{ row['question'] }}</td>
                 <td><a href="{{ url_for('question', q_id = row["id"] ) }}">Go In Deeper</a></td>
@@ -43,7 +43,7 @@
             <th width="3%">Link</th>
         </tr>
         <!-- #petla wpisujaca wartosci -->
-        {% for row in answers_list %}
+        {% for row in list_of_answers %}
             <tr>
                 <td>{{ row['answer'] }}</td>
                 <td><a href="{{ url_for('question', q_id = row["id"] ) }}">Go In Deeper</a></td>
@@ -65,7 +65,7 @@
         <th width="3%">Link</th>
     </tr>
     
-    {% for row in comments_list %}
+    {% for row in list_of_comments %}
         <tr>
             <td>{{ row['comment'] }}</td>
             <td><a href="{{ url_for('question', q_id = row["id"] ) }}">Go In Deeper</a></td>
