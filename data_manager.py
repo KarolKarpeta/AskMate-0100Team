@@ -105,7 +105,7 @@ def add_new_comment_db(cursor, q_id, message):
 def search_question_db(cursor, message):
     cursor.execute ("""SELECT DISTINCT(q.id), q.submission_time, q.view_number, q.vote_number, q.title, q.message, q.image 
                         FROM question as q 
-                        join answer as a on q.id = a.question_id
+                        left join answer as a on q.id = a.question_id
                         WHERE LOWER(q.title) LIKE '%{0}%' 
                             or LOWER(q.message) like '%{0}%' 
                             or LOWER(a.message) like '%{0}%'; """.format(message))
@@ -203,6 +203,8 @@ def get_user_questions_answers_comments(cursor, user_id):
 def get_user_name_by_id(cursor, user_id):
     cursor.execute("""SELECT user_name 
                       FROM users
-                      WHERE user_name = {user_id};""".format(user_id))
-    user_name = cursor.fetchall()
-    return user_name
+                      WHERE user_id = {user_id};""".format(user_id = user_id))
+
+    user_name = cursor.fetchone()
+    return user_name['user_name']
+

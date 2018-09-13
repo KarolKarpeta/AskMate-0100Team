@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class='main_label'>
-    <p><a href="/list"> <input type="button" value="BACK" name="add"></a></p>
+    <p><a href="/users"> <input type="button" value="BACK" name="add"></a></p>
     <div id='title2'>
        USER:  {{ list_of_questions[0]["user_name"] }}
     </div>
@@ -24,7 +24,9 @@
 
         {% for row in list_of_questions %}
             <tr>
-                <td> {{ row["title"] }} </td>
+                <td> 
+                    <a href="{{ url_for('question', q_id = row["id"] ) }}">{{ row['title'] }} </a> 
+                </td>
             </tr>
         {% endfor %}
     </table>
@@ -35,8 +37,8 @@
     <table style="width:100%">
         {% for row in list_of_answers %}
             <tr>
-
-                <td> {{ row["title"] }} </td>
+                <td>
+                    <a href="{{ url_for('question', q_id = row["id"] ) }}">{{ row['title'] }} </a>
                 </td>
             </tr>
         {% endfor %}
@@ -48,7 +50,9 @@
     <table style="width:100%">
         {% for row in list_of_comments %}
             <tr>
-                <td>{{ row["title"] }} </td>
+                <td>
+                    <a href="{{ url_for('question', q_id = row["id"] ) }}">{{ row['title'] }} </a>
+                </td>
             </tr>
         {% endfor %}
     </table>
