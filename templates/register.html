@@ -7,21 +7,30 @@
     <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
 </head>
 <body>
-    <p><a href="/list"> <input type="button" value="BACK" name = "back"></a></p>
 
-    <form name="form1" action='{{ url_for("register")}}' method="POST" onsubmit="return required()">
+    <div id="container">
 
-        <p>Username</p>
+        <div id='title1'>
+            <h1>Please set your password and login</h1>
+        </div>
+        <div id='label1'>
+        <p class='button1'><a href="/list"> <input type="button" value="BACK" name = "back"></a></p>
 
-        <input type="text" id='username' name='username' >
+        <form name="form1" action='{{ url_for("register")}}' method="POST" onsubmit="return required()">
 
-        <p>Password</p>
-        <input type="password" id='password' name='password' >
+            <p>Username</p>
 
-        <p><button type="submit" name="register" value="register">REGISTER</button></p>
-    </form>
+            <input type="text" id='username' name='username' >
 
-   <h3>{{message}}</h3> {# Wiadomosc o istniejacym uzytkowniku#}
-<script src="/static/non-empty.js"></script>
+            <p>Password</p>
+            <input type="password" id='password' name='password' >
+
+            <p><button type="submit" name="register" value="register">REGISTER</button></p>
+        </form>
+    </div>
+
+    <h3>{{message}}</h3> {# Wiadomosc o istniejacym uzytkowniku#}
+    <script src="/static/non-empty.js"></script>
+    </div>
 </body>
 </html>
