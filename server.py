@@ -22,6 +22,9 @@ def get_list():
 def add_question():
     msg = ""
     form_values = {}
+    all_users_name = data_manager.get_all_users()
+
+    print("All user name", all_users_name)
 
     if request.method == 'POST':
         form_values = request.form
@@ -30,7 +33,7 @@ def add_question():
         if msg == "Correct":
             return redirect("/list")
 
-    return render_template('ask_question.html', message=msg, form=form_values)
+    return render_template('ask_question.html', message=msg, form=form_values, all_users_name=all_users_name)
 
 
 @app.route('/question/<int:q_id>', methods=['GET', 'POST'])

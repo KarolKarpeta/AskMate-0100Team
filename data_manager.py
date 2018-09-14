@@ -66,14 +66,14 @@ def get_comments_by_question_id_dbm(cursor, q_id):
 
 
 @database_common.connection_handler # moja probna funkcja
-def add_new_question(cursor, title, message):
+def add_new_question(cursor, title, message, user_id):
     time = util.generate_time_in_UNIX()
     submission_time = util.convert_unix_to_time_str(time)
     cursor.execute ("""
                     INSERT INTO question
-                    (submission_time,view_number,vote_number,title,message)
-                    VALUES('{}',0, 0, '{}', '{}');
-                    """.format(submission_time,title,message))
+                    (submission_time,view_number,vote_number,title,message, userid)
+                    VALUES('{}',0, 0, '{}', '{}', {});
+                    """.format(submission_time,title,message,user_id))
     return cursor.rowcount
 
 
@@ -208,3 +208,10 @@ def get_user_name_by_id(cursor, user_id):
     user_name = cursor.fetchone()
     return user_name['user_name']
 
+
+@database_common.connection_handler
+def get_all_users(cursor):
+    cursor.execute("""SELECT user_id, user_name FROM users;""")
+
+    user_name = cursor.fetchall()
+    return user_name

@@ -95,7 +95,7 @@ def delete_answer_logic_by_q_id(q_id):
 
 def check_length_message_question_db(inputs):
     if util.correct_length(inputs['message'], ">=", 10):
-        data_manager.add_new_question(inputs['title'],inputs['message'])
+        data_manager.add_new_question(inputs['title'],inputs['message'],inputs['user_id'], )
         return "Correct"
     else:
         return "Your message is too short. (Must be at least 10 characters long)"
