@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Ask Mate</title>
     <link rel="stylesheet" type="text/css" href='{{ url_for("static",filename="layout.css") }}'>
+
     <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
 
 </head>
@@ -23,30 +24,25 @@
 
     <h1>Ask Mate - Questions</h1>
 
-    <p><a href="/new-question"> <input type="button" value="ADD NEW QUESTION" name="add"></a></p>
-
-
     <table id='tab_questions'>
-        <!-- HEADERSY DO TABELI -->
-        <!-- ID  -->
-        <tr>
-            <th>{{ headers.0 }}</th> <!-- submission_time  -->
-            <th>{{ headers.1 }}</th> <!-- Title  -->
-            <th>{{ headers.4 }}</th>
-            <th>{{ headers.2 }}</th><!-- Views  -->
-            <th>Delete</th><!-- delete  -->
+        <tr >
+
+            <th style="text-align : center">SUBMISSION TIME</th> <!-- Title  -->
+            <th style="text-align : center">TITTLE</th>
+            <th style="text-align : center">VIEWS</th><!-- Views  -->
+            <th style="text-align : center">DELETE</th><!-- delete  -->
 
         </tr>
         <!-- #petla wpisujaca wartosci -->
         {% for row in list_of_dict_on_main %}
             <tr>
-                <td style="text-align : center">{{ row['id'] }}</td>
+
                 <td style="text-align : center">{{ row['submission_time'] }}</td>
                 <td>
                     <a href="{{ url_for('question', q_id = row["id"] ) }}">{{ row['title'] }} </a>
                 </td>
                 <td style="text-align : center">{{ row['view_number'] }}</td>
-                <td>
+                <td style="text-align : center">
                     <form action='{{ url_for("delete_question", q_id = row["id"]) }}' method="POST">
                         <button type="submit" name="delete_question" value="delete_row">DELETE QUESTION</button>
                     </form>
@@ -56,6 +52,8 @@
 
 
     </table>
+
+    <p><a href="/new-question"> <input type="button" class="w3-button w3-block w3-black" value="ADD NEW QUESTION" name="add" ></a></p>
 </div>
 </body>
 </html>

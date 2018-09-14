@@ -28,14 +28,21 @@
                         <p><label for="message">Message</label></p>
                             <textarea id='message' name='message' rows="10" cols="40"></textarea>
                         {% endif %}
-                </div>
-                
 
+
+                        <select id='user_id' name='user_id'>
+                            <option value="">--Please choose an option--</option>
+                             {% for row in all_users_name %}
+                                <option value={{ row['user_id'] }}> {{ row['user_name'] }} </option>
+                             {% endfor %}
+                         </select>
+
+
+                        <div class='button1'><p><button type="submit">ADD QUESTION</button></p></div>
+                        <div style="clear:both"></div>
                 
-                <div class='button1'><p><button type="submit">ADD QUESTION</button></p></div>
-                <div style="clear:both"></div>
-                
-                </form>
+                    </form>
+                </div>
         </div>
         </body>
 </html>

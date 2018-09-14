@@ -65,13 +65,13 @@
     
     <table style="display:none" id=p1>
         <tr>
-            <th style="width: 20%">SUBMISSION TIME</th>
-            <th style="width: 80%">QUESTION</th>
+            <th style="text-align : center;width: 20%">SUBMISSION TIME</th>
+            <th style="text-align : center;width: 80%">QUESTION</th>
         </tr>
 
         {% for row in list_of_questions %}
             <tr>
-                <td>{{ row['submission_time'] }} </td>
+                <td style="text-align : center">{{ row['submission_time'] }} </td>
                 <td> 
                     <a href="{{ url_for('question', q_id = row["id"] ) }}">{{ row['title'] }} </a>
                 </td>
@@ -84,13 +84,13 @@
     </button>
     <table style="display:none" id=p2>
         <tr>
-            <th style="width: 20%">SUBMISSION TIME</th>
-            <th style="width: 80%">ANSWERS</th>
+            <th style="text-align : center;width: 20%">SUBMISSION TIME</th>
+            <th style="text-align : center;width: 80%">ANSWERS</th>
         </tr>
 
         {% for row in list_of_answers %}
             <tr>
-                <td>{{ row['submission_time'] }} </td>
+                <td style="text-align : center">{{ row['submission_time'] }} </td>
                 <td>
                     <a href="{{ url_for('question', q_id = row["id"] ) }}">{{ row['title'] }} </a>
                 </td>
@@ -103,12 +103,12 @@
     </button>
     <table style="display:none" id=p3>
         <tr>
-            <th style="width: 20%">SUBMISSION TIME</th>
-            <th style="width: 80%">COMMENTS</th>
+            <th style="text-align : center;width: 20%">SUBMISSION TIME</th>
+            <th style="text-align : center;width: 80%">COMMENTS</th>
         </tr>
         {% for row in list_of_comments %}
             <tr>
-                <td>{{ row['submission_time'] }} </td>
+                <td style="text-align : center">{{ row['submission_time'] }} </td>
                 <td>
                     <a href="{{ url_for('question', q_id = row["id"] ) }}">{{ row['title'] }} </a>
                 </td>
