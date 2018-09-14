@@ -29,8 +29,10 @@
                             <textarea id='message' name='message' rows="10" cols="40"></textarea>
                         {% endif %}
 
-
+                        <p>User, who asks a question</p>
                         <select id='user_id' name='user_id'>
+                                
+
                             <option value="">--Please choose an option--</option>
                              {% for row in all_users_name %}
                                 <option value={{ row['user_id'] }}> {{ row['user_name'] }} </option>
